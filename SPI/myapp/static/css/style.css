@@ -1,0 +1,155 @@
+/* Custom CSS for Navigation and Slider */
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-item {
+    margin: 0 15px;
+}
+
+.nav-link {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Hover Dropdowns */
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown > .dropdown-toggle:active {
+    pointer-events: none;
+}
+
+/* Remove Dropdown Arrows */
+.dropdown-toggle::after {
+    display: none;
+}
+
+/* Improved Dropdown Menu Design */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    border-radius: 5px;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Slider Styles */
+.carousel-item img {
+    object-fit: cover;
+    height: 400px;
+    width: 100%;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Icons Row Styling */
+.icons-row {
+    background-color: #257947;  /* adjust */
+    color: white;
+    padding: 30px 0;  /* increased padding for larger buttons */
+    text-align: center;
+    border-radius: 10px; /* Rounded corners for the entire row */
+    margin: 10px auto; /* Center horizontally and add some margin */
+    width: 80%;  /* Adjust width as needed for the "button" look */
+   background: linear-gradient(to bottom, #257947, #257947);
+}
+
+.icons-row a {
+    color: white;
+    text-decoration: none;
+    margin: 0 30px;  /* Adjust spacing between buttons */
+    display: inline-block;
+     padding: 10px 20px; /* added padding to the link, for better look of a button */
+    border-radius: 5px;  /* rounded corners of the links*/
+     transition: background-color 0.3s ease;  /* smooth background color transition */
+
+}
+   .icons-row a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly lighter background on hover */
+}
+
+.icons-row i {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Improved Top Bar */
+.top-bar {
+    background-color: #257947; /* Dark Gray */
+    color: #f8f9fa; /* Light Gray */
+    padding: 8px 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle bottom border */
+}
+
+.top-bar a {
+    color: #f8f9fa;
+    text-decoration: none;
+    margin: 0 15px; /* Spacing between links */
+    padding: 5px 10px; /* Padding around the links */
+    border-radius: 3px; /* Rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.top-bar a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Lighter background on hover */
+    color: white;
+}
+/* If adding social icons
+.top-bar .social-icons {
+margin-left: 20px;
+
+}
+
+.top-bar .social-icons a {
+margin: 0 5px;
+}
+*/
+/* Portal Links Section */
+.portal-links {
+    padding: 20px 0;  /* Add some vertical padding */
+    text-align: center;  /* Center the content */
+}
+
+.portal-card {
+    display: inline-block;  /* Display the links side by side */
+    width: 200px;  /* Adjust the width of each card */
+    background-color: #f8f9fa;  /* Light gray background */
+    border-radius: 10px;  /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+    padding: 20px;  /* Internal spacing */
+    margin: 0 10px;  /* Spacing between the cards */
+    text-decoration: none;  /* Remove underlines from the links */
+    color: #343a40;  /* Dark gray text color */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
+}
+
+.portal-card:hover {
+    transform: translateY(-3px);  /* Slight lift on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* More pronounced shadow */
+}
+
+.portal-card i {
+    font-size: 3em;  /* Adjust icon size */
+    display: block;
+    margin-bottom: 10px;  /* Space between icon and text */
+}
