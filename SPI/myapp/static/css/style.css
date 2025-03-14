@@ -153,3 +153,17 @@ margin: 0 5px;
     display: block;
     margin-bottom: 10px;  /* Space between icon and text */
 }
+.navbar-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other content */
+    transition: all 0.3s ease-in-out; /* Smooth transition */
+    background-color: rgba(255, 255, 255, 0.95); /* Optional: Slightly transparent background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+
+.navbar-original {
+    position:relative;
+}
