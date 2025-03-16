@@ -96,7 +96,7 @@ def login_view(request):
 @login_required(login_url='/login/')
 def student_dashboard(request):
     context = {'user': request.user}
-    return render(request, 'myapp/student_dashboard.html', context)
+    return render(request, 'student_dashboard.html', context)
 
 # --- Admin Views ---
 def is_admin(user):
