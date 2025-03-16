@@ -56,8 +56,8 @@ ROOT_URLCONF = 'SPI.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Add this if you want to store templates in the project root
-        'APP_DIRS': True,  # Very important! This tells Django to look in the "templates" folder *within each app*.
+        'DIRS': [BASE_DIR / 'templates'], # BASE_DIR is your root where settings.py exists
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -128,3 +128,8 @@ STATIC_URL = '/static/'  # URL for static files
 STATICFILES_DIRS = [
     BASE_DIR / 'myapp/static',  # Path to your static files directory
 ]
+LOGIN_REDIRECT_URL = 'home'
+
+# settings.py
+USE_TZ = True
+TIME_ZONE = 'Asia/Manila'

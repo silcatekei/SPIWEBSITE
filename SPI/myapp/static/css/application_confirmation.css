@@ -1,0 +1,53 @@
+/* static/myapp/css/application_confirmation.css */
+
+.application-confirmation-content {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 800px; /* Adjust as needed */
+    margin: 20px auto; /* Center the content */
+    text-align: left;
+  }
+  
+  .application-confirmation-content h1 {
+    color: #37474f;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 2.2em;
+    text-align: center; /* Center the heading */
+  }
+  
+  .application-confirmation-content h2 {
+    color: #455a64;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.6em;
+    font-weight: 500;
+  }
+  
+  .application-confirmation-content p {
+    color: #546e7a;
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+  
+  .application-confirmation-content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  .application-confirmation-content li {
+    color: #455a64;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+  }
+  
+  .application-confirmation-content strong {
+    font-weight: 500;
+    color: #263238;
+  }

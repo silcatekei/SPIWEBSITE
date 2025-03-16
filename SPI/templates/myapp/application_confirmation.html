@@ -1,0 +1,37 @@
+{% extends 'application_base.html' %}
+{% load static %}
+
+{% block title %}Application Confirmation{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/application_confirmation.css' %}">
+    <script>
+        // Set the timer (in milliseconds)
+        const redirectTime = 10000; // 10 seconds
+
+        // Redirect to the home page after the specified time
+        setTimeout(function() {
+            window.location.href = "{% url 'home' %}"; // Replace 'home' with your home page URL name
+        }, redirectTime);
+    </script>
+{% endblock %}
+
+{% block content %}
+   <div class="admin-dashboard-content">
+        <h1>Application Received!</h1>
+        <p>Thank you, {{ application.name }}, for submitting your application.</p>
+
+        <h2>Application Summary:</h2>
+        <ul>
+            <li><strong>Name:</strong> {{ application.name }}</li>
+            <li><strong>Email:</strong> {{ application.email }}</li>
+            <li><strong>Application Date:</strong> {{ application.application_date }}</li>
+            {# Add more application details here #}
+        </ul>
+
+        <h2>Next Steps:</h2>
+        <p>Your application is currently under review. You will receive an email notification once a decision has been made. Please allow 2-3 weeks for processing.</p>
+
+        <p>You can check the status of your application at any time by logging in to your account on our website.</p>
+    </div>
+{% endblock %}

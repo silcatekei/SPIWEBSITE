@@ -1,0 +1,36 @@
+{% extends "admin_login_base.html" %} {# Change the base #}
+{% load static %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block extrastyle %} {# Add this extrastyle block #}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/admin_login.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="form-signin">
+  <form method="post">
+    {% csrf_token %}
+    <img class="mb-4" src="{% static 'images/SPI_LOGO-removebg-preview.png' %}" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Admin Login</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
+      <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">© 2017–2024</p>
+  </form>
+</main>
+{% endblock %}

@@ -1,8 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ApplicationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib import messages  # Always good to use messages for feedback
+from .models import Application  # Import your Application model
+from django.utils import timezone
 
+# --- Basic Page Views ---
 def home(request):
-    return render(request, 'myapp/home.html')  # Create home.html in myapp/templates/myapp/
+    return render(request, 'myapp/home.html')
 
 def about(request):
     return render(request, 'myapp/about.html')
@@ -43,12 +50,139 @@ def contact(request):
 def quick_links(request):
     return render(request, 'myapp/quick_links.html')
 
+# --- Apply Online View ---
 def apply_online(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
         if form.is_valid():
-            form.save()  # Now this will work
-            return redirect('home')
+            application = form.save() # Save the form
+            messages.success(request, "Application submitted successfully!")
+            return redirect('application_confirmation', application_id=application.id)
+        else:
+            messages.error(request, "Please correct the errors below.")
+
     else:
         form = ApplicationForm()
+
     return render(request, 'myapp/apply_online.html', {'form': form})
+
+def application_confirmation(request, application_id):
+    application = get_object_or_404(Application, pk=application_id) # get_object_or_404 if does not exist will display a 404 instead of displaying nothing
+    return render(request, 'myapp/application_confirmation.html', {'application': application})
+
+# --- Login Views ---
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password) # Authentication with request argument
+
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"Welcome, {username}!")  # Add success message on login
+                return redirect('student_dashboard')
+            else:
+                messages.error(request, 'Invalid username or password.')
+        else:
+            messages.error(request, 'Invalid username or password.')
+
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form}) # Updated path
+
+@login_required(login_url='/login/')
+def student_dashboard(request):
+    context = {'user': request.user}
+    return render(request, 'myapp/student_dashboard.html', context)
+
+# --- Admin Views ---
+def is_admin(user):
+    return user.is_staff and user.is_superuser # checks if the user is both of the condition
+
+@login_required
+@user_passes_test(is_admin) # checks user is an admin before accessing
+def admin_dashboard(request):
+    applications = Application.objects.all().order_by('-application_date')
+    application_count = Application.objects.count()
+    accepted_count = Application.objects.filter(status='accepted').count()
+    rejected_count = Application.objects.filter(status='rejected').count()
+    pending_count = Application.objects.filter(status='pending').count()
+
+    context = {
+        'applications': applications,
+        'application_count': application_count,
+        'accepted_count': accepted_count,
+        'rejected_count': rejected_count,
+        'pending_count': pending_count,
+    }
+    return render(request, 'admin_dashboard.html', context)
+
+def admin_login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+
+                if is_admin(user):
+                    messages.success(request, f"Admin {username} logged in successfully.") # message to the user
+                    return redirect('admin_home')
+                else:
+                    logout(request)
+                    messages.error(request, "You do not have admin privileges.")
+                    return redirect('login')  # or redirect to some unauthorized page
+            else:
+                messages.error(request, 'Invalid username or password')
+        else:
+            messages.error(request, 'Invalid username or password')
+
+    else:
+        form = AuthenticationForm() # if there is no data
+
+    return render(request, 'admin_login.html', {'form': form}) # renders the form
+
+@login_required
+@user_passes_test(is_admin)
+def accept_application(request, application_id):
+    application = get_object_or_404(Application, pk=application_id)
+    application.status = 'accepted' # update application
+    application.save() # save it
+    messages.success(request, f"Application for {application.name} accepted.") # send a message to the screen
+    return redirect('admin_dashboard')
+
+@login_required
+@user_passes_test(is_admin)
+def reject_application(request, application_id):
+    application = get_object_or_404(Application, pk=application_id) # application id check
+    application.status = 'rejected' # changes the status to reject in case that exist
+    application.save()
+    messages.success(request, f"Application for {application.name} rejected.")#message to the screen
+    return redirect('admin_dashboard') # returns to the dashboard
+@login_required
+@user_passes_test(is_admin)
+def admin_home(request):
+    application_count = Application.objects.count()
+    accepted_count = Application.objects.filter(status='accepted').count()
+    rejected_count = Application.objects.filter(status='rejected').count()
+    pending_count = Application.objects.filter(status='pending').count()
+
+    context = {
+        'application_count': application_count,
+        'accepted_count': accepted_count,
+        'rejected_count': rejected_count,
+        'pending_count': pending_count,
+    }
+    return render(request, 'admin_home.html',context)
+
+def application_confirmation(request, application_id):
+    application = Application.objects.get(pk=application_id)
+
+    context = {'application': application}
+    return render(request, 'myapp/application_confirmation.html', context)

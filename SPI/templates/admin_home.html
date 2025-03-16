@@ -1,0 +1,32 @@
+<!-- templates/myapp/admin_home.html -->
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block title %}Admin Home{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/admin_home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="admin-home-content">
+        <h1>Welcome to the Admin Dashboard</h1>
+        <p>This is your personalized dashboard. Here you can get a quick overview of key metrics and access important tools.</p>
+
+        <div class="quick-links">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="{% url 'admin_dashboard' %}">All Applications</a></li>
+                <li><a href="#">Manage Users</a></li>  {# Replace with actual URL #}
+                <li><a href="#">View Reports</a></li>   {# Replace with actual URL #}
+                <!-- Add more quick links here -->
+            </ul>
+        </div>
+
+        <div class="recent-activity">
+            <h2>Recent Activity</h2>
+            <p>No recent activity to display.</p>
+            <!-- Add code to display recent activity logs or events -->
+        </div>
+    </div>
+{% endblock %}
