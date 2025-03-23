@@ -1,44 +1,109 @@
-{% include 'myapp/header.html' %}
-{% include 'myapp/nav.html' %}
+{% load static %}
 
 <style>
+    /* General body styles for the Mica effect to be visible */
+    html, body {
+        height: 100%; /* Required for sticky footer */
+        margin: 0;
+        font-family: sans-serif; /* Or your preferred font */
+        background-color: #f0f2f5; /* Light background to complement the Mica effect */
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Important: Style the main content area */
+    main {
+        flex: 1;  /* This makes the main area fill available space, pushing the footer down */
+        /* Optional: Add some padding or margin here if needed */
+    }
+
+
     .history-container {
         max-width: 900px;
         margin: 50px auto;
         padding: 30px;
-        background-color: #f9f9f9;
+        background-color: rgba(255, 255, 255, 0.7); /* Translucent white background */
+        backdrop-filter: blur(10px); /* Apply blur for the Mica effect */
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
         text-align: justify;
+        border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: Subtle border */
     }
+
     .history-title {
         text-align: center;
         font-size: 28px;
         font-weight: bold;
         color: #004d00;
         margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
     }
+
     .history-content {
         font-size: 18px;
         line-height: 1.6;
         color: #333;
     }
+
+    /* Improve readability on translucent background */
+    .history-content strong {
+        color: #222; /* Darken strong text for better contrast */
+    }
+
+    footer {
+        background-color: #004d00;
+        color: yellow;
+        padding: 40px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        border-top: 4px solid yellow;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+        color: #ffcc00; /* Lighter yellow when hovered */
+        text-shadow: 1px 1px 5px black;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+        footer {
+            padding: 20px; /* Reduce padding */
+            flex-direction: column; /* Stack sections vertically */
+            align-items: stretch; /* Stretch sections to full width */
+            text-align: center; /* Center text */
+        }
+
+        footer > div {
+            max-width: 100% !important; /* Allow sections to take full width */
+            margin: 10px 0 !important; /* Add vertical spacing */
+        }
+    }
 </style>
 
-<div class="history-container">
-    <h2 class="history-title">Our History</h2>
-    <p class="history-content">
-        <strong>Skill Power Institute (SPI)</strong> is a non-stock, non-profit learning organization 
-        committed to community service through quality education. It was established on 
-        <strong>November 4, 1997</strong> and has become one of the pioneers in tertiary computer education, 
-        not only in Antipolo but also in neighboring towns and municipalities.
-    </p>
-    <p class="history-content">
-        Following its success in Antipolo, SPI expanded its reach by establishing various branches. 
-        <strong>Nego-Skwela</strong> was opened in <strong>Quezon City</strong>, and AMS and CDC courses were introduced in 
-        locations such as <strong>Quezon City, Angeles, Cabanatuan, Urdaneta, Tarlac, and Sucat</strong>. 
-        These expansions further solidified SPI’s commitment to providing quality education across the country.
-    </p>
-</div>
+<body>
+    {% include 'myapp/header.html' %}
+    {% include 'myapp/nav.html' %}
 
-{% include 'myapp/footer.html' %}
+    <main>  <!-- THIS IS VERY IMPORTANT.  MAKE SURE EVERYTHING BETWEEN NAV AND FOOTER IS INSIDE <MAIN> -->
+        <div class="history-container">
+            <h2 class="history-title">Our History</h2>
+            <p class="history-content">
+                <strong>Skill Power Institute (SPI)</strong> is a non-stock, non-profit learning organization 
+                committed to community service through quality education. It was established on 
+                <strong>November 4, 1997</strong> and has become one of the pioneers in tertiary computer education, 
+                not only in Antipolo but also in neighboring towns and municipalities.
+            </p>
+            <p class="history-content">
+                Following its success in Antipolo, SPI expanded its reach by establishing various branches. 
+                <strong>Nego-Skwela</strong> was opened in <strong>Quezon City</strong>, and AMS and CDC courses were introduced in 
+                locations such as <strong>Quezon City, Angeles, Cabanatuan, Urdaneta, Tarlac, and Sucat</strong>. 
+                These expansions further solidified SPI’s commitment to providing quality education across the country.
+            </p>
+        </div>
+    </main>  <!-- END MAIN CONTENT WRAPPER -->
+
+    {% include 'myapp/footer.html' %}
+</body>

@@ -1,74 +1,118 @@
-{% include 'myapp/header.html' %}
-{% include 'myapp/nav.html' %}
+{% load static %}
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #e6f2e6;
-        margin: 0;
-        padding: 0;
-    }
-    .about-container {
-        max-width: 1200px;
-        margin: auto;
-        padding: 60px 20px;
-        text-align: center;
-    }
-    .about-title {
-        font-size: 42px;
-        font-weight: bold;
-        color: #f1e025;
-        text-transform: uppercase;
-        margin-bottom: 30px;
-        text-shadow: 2px 2px 4px black;
-    }
-    .about-section {
-        background-color: white;
-        padding: 40px;
-        border-radius: 10px;
-        margin-bottom: 40px;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease-in-out;
-    }
-    .about-section:hover {
-        transform: scale(1.02);
-    }
-    .about-section h2 {
-        color: #004d00;
-        font-size: 28px;
-        margin-bottom: 15px;
-    }
-    .about-section p {
-        font-size: 18px;
-        line-height: 1.8;
-        color: #333;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Skill Power Institute</title>
+    <style>
+        /* General body styles for the Mica effect and sticky footer */
+        html, body {
+            height: 100%; /* Required for sticky footer */
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e6f2e6; /* Light green background */
+            display: flex;
+            flex-direction: column;
+        }
 
-<div class="about-container">
-    <h1 class="about-title">About Skill Power Institute</h1>
-    
-    <div class="about-section">
-        <h2>Our History</h2>
-        <p>Skill Power Institute (SPI) is a non-stock, non-profit learning organization committed to community service through quality education. Established on November 4, 1997, SPI became a pioneer in tertiary computer education, not only in Antipolo but also in neighboring towns and municipalities.</p>
-    </div>
-    
-    <div class="about-section">
-        <h2>Mission</h2>
-        <p>To provide accessible and high-quality education that empowers students with the knowledge and skills needed to succeed in their careers and contribute to society.</p>
-    </div>
-    
-    <div class="about-section">
-        <h2>Vision</h2>
-        <p>To be a leading institution recognized for excellence in education, innovation, and community service.</p>
-    </div>
-    
-    <div class="about-section">
-        <h2>Core Values</h2>
-        <p><strong>Integrity:</strong> Upholding honesty and ethical standards in all our endeavors.</p>
-        <p><strong>Excellence:</strong> Striving for the highest standards in education and professional growth.</p>
-        <p><strong>Community Service:</strong> Making education accessible and impactful for society.</p>
-    </div>
-</div>
+        main {
+            flex: 1; /* Pushes the footer to the bottom */
+        }
 
-{% include 'myapp/footer.html' %}
+        .about-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .about-title {
+            font-size: 42px;
+            font-weight: bold;
+            color: #f1e025;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        .about-section {
+            background-color: rgba(255, 255, 255, 0.7); /* Translucent white background */
+            backdrop-filter: blur(10px); /* Apply blur for the Mica effect */
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* More subtle shadow */
+            transition: transform 0.3s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: Subtle border */
+        }
+
+        .about-section:hover {
+            transform: scale(1.02);
+        }
+
+        .about-section h2 {
+            color: #004d00;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .about-section p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* New:  Apply Mica styling to the container itself */
+        .about-container {
+            background-color: rgba(255, 255, 255, 0.3); /* Very subtle translucency */
+            backdrop-filter: blur(8px); /* A slight blur */
+            padding: 20px; /* Add some padding around the container */
+            border-radius: 15px; /* Rounded corners */
+        }
+
+        /* New:  Ensure the sections fill the container without gaps */
+        .about-section {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 800px; /* Or whatever width looks good */
+        }
+
+    </style>
+</head>
+<body>
+    {% include 'myapp/header.html' %}
+    {% include 'myapp/nav.html' %}
+
+    <main>
+        <div class="about-container">
+            <h1 class="about-title">About Skill Power Institute</h1>
+
+            <div class="about-section">
+                <h2>Our History</h2>
+                <p>Skill Power Institute (SPI) is a non-stock, non-profit learning organization committed to community service through quality education. Established on November 4, 1997, SPI became a pioneer in tertiary computer education, not only in Antipolo but also in neighboring towns and municipalities.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Mission</h2>
+                <p>To provide accessible and high-quality education that empowers students with the knowledge and skills needed to succeed in their careers and contribute to society.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Vision</h2>
+                <p>To be a leading institution recognized for excellence in education, innovation, and community service.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Core Values</h2>
+                <p><strong>Integrity:</strong> Upholding honesty and ethical standards in all our endeavors.</p>
+                <p><strong>Excellence:</strong> Striving for the highest standards in education and professional growth.</p>
+                <p><strong>Community Service:</strong> Making education accessible and impactful for society.</p>
+            </div>
+        </div>
+    </main>
+
+    {% include 'myapp/footer.html' %}
+</body>
+</html>
