@@ -15,22 +15,22 @@ def about(request):
     return render(request, 'myapp/about.html')
 
 def mission(request):
-    return render(request, 'myapp/mission.html')
+    return render(request, 'myapp/mv.html')
 
 def history(request):
-    return render(request, 'myapp/history.html')
+    return render(request, 'myapp/hist.html')
 
 def admissions(request):
-    return render(request, 'myapp/admissions.html')
+    return render(request, 'admissions.html')
 
 def requirements(request):
-    return render(request, 'myapp/requirements.html')
+    return render(request, 'myapp/req.html')
 
 def application_process(request):
-    return render(request, 'myapp/application_process.html')
+    return render(request, 'myapp/appprocess.html')
 
 def tuition(request):
-    return render(request, 'myapp/tuition.html')
+    return render(request, 'myapp/tf.html')
 
 def academics(request):
     return render(request, 'myapp/academics.html')
@@ -42,7 +42,7 @@ def faculty(request):
     return render(request, 'myapp/faculty.html')
 
 def calendar(request):
-    return render(request, 'myapp/calendar.html')
+    return render(request, 'myapp/acc_calendar.html')
 
 def contact(request):
     return render(request, 'myapp/contact.html')

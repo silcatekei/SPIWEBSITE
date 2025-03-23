@@ -1,3 +1,14 @@
+/* Custom CSS for Header */
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: start; /* Align logo to the left */
+}
+
+header img {
+    height: 90px; /* Increased size by 10px */
+}
+
 /* Custom CSS for Navigation and Slider */
 .navbar-nav {
     display: flex;
@@ -54,35 +65,35 @@
 }
 
 .carousel-caption {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
 }
 
 /* Icons Row Styling */
 .icons-row {
-    background-color: #257947;  /* adjust */
+    background-color: #257947;  
     color: white;
-    padding: 30px 0;  /* increased padding for larger buttons */
+    padding: 30px 0;  
     text-align: center;
-    border-radius: 10px; /* Rounded corners for the entire row */
-    margin: 10px auto; /* Center horizontally and add some margin */
-    width: 80%;  /* Adjust width as needed for the "button" look */
-   background: linear-gradient(to bottom, #257947, #257947);
+    border-radius: 10px;
+    margin: 10px auto;
+    width: 80%;
+    background: linear-gradient(to bottom, #257947, #257947);
 }
 
 .icons-row a {
     color: white;
     text-decoration: none;
-    margin: 0 30px;  /* Adjust spacing between buttons */
+    margin: 0 30px;
     display: inline-block;
-     padding: 10px 20px; /* added padding to the link, for better look of a button */
-    border-radius: 5px;  /* rounded corners of the links*/
-     transition: background-color 0.3s ease;  /* smooth background color transition */
-
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
-   .icons-row a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Slightly lighter background on hover */
+
+.icons-row a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .icons-row i {
@@ -93,105 +104,99 @@
 
 /* Improved Top Bar */
 .top-bar {
-    background-color: #257947; /* Dark Gray */
-    color: #f8f9fa; /* Light Gray */
+    background-color: #257947;
+    color: #f8f9fa;
     padding: 8px 0;
     font-size: 0.9rem;
     font-weight: 500;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle bottom border */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .top-bar a {
     color: #f8f9fa;
     text-decoration: none;
-    margin: 0 15px; /* Spacing between links */
-    padding: 5px 10px; /* Padding around the links */
-    border-radius: 3px; /* Rounded corners */
+    margin: 0 15px;
+    padding: 5px 10px;
+    border-radius: 3px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .top-bar a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Lighter background on hover */
+    background-color: rgba(255, 255, 255, 0.1);
     color: white;
 }
-/* If adding social icons
-.top-bar .social-icons {
-margin-left: 20px;
 
-}
-
-.top-bar .social-icons a {
-margin: 0 5px;
-}
-*/
 /* Portal Links Section */
 .portal-links {
-    padding: 20px 0;  /* Add some vertical padding */
-    text-align: center;  /* Center the content */
+    padding: 20px 0;
+    text-align: center;
 }
 
 .portal-card {
-    display: inline-block;  /* Display the links side by side */
-    width: 200px;  /* Adjust the width of each card */
-    background-color: #f8f9fa;  /* Light gray background */
-    border-radius: 10px;  /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
-    padding: 20px;  /* Internal spacing */
-    margin: 0 10px;  /* Spacing between the cards */
-    text-decoration: none;  /* Remove underlines from the links */
-    color: #343a40;  /* Dark gray text color */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
+    display: inline-block;
+    width: 200px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    color: #343a40;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .portal-card:hover {
-    transform: translateY(-3px);  /* Slight lift on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* More pronounced shadow */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .portal-card i {
-    font-size: 3em;  /* Adjust icon size */
+    font-size: 3em;
     display: block;
-    margin-bottom: 10px;  /* Space between icon and text */
+    margin-bottom: 10px;
 }
+
+/* Sticky Navbar */
 .navbar-sticky {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Ensure it's above other content */
-    transition: all 0.3s ease-in-out; /* Smooth transition */
-    background-color: rgba(255, 255, 255, 0.95); /* Optional: Slightly transparent background */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-original {
-    position:relative;
+    position: relative;
 }
 
+/* Form Styling */
 .form-signin {
     max-width: 330px;
     padding: 1rem;
-  }
+}
 
 .form-signin .form-floating {
     margin-bottom: 1rem;
-  }
+}
 
 .form-signin .form-floating:focus-within {
     z-index: 2;
-  }
+}
 
 .form-signin input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-  }
+}
 
 .form-signin input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-  }
+}
 
 .bd-placeholder-img {
     font-size: 1.125rem;
@@ -199,10 +204,10 @@ margin: 0 5px;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-  }
+}
 
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {
-      font-size: 3.5rem;
+        font-size: 3.5rem;
     }
-  }
+}

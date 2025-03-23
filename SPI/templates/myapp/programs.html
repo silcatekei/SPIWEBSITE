@@ -1,0 +1,216 @@
+{% include 'myapp/header.html' %}
+{% include 'myapp/nav.html' %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    .programs-container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 50px 20px;
+    }
+
+    .program-title {
+        font-size: 40px;
+        font-weight: bold;
+        color: #f1e025;
+        margin-bottom: 20px;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.6);
+        padding: 15px 30px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    .image-container {
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .course-img {
+        width: 100%;
+        max-width: 700px;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .course-img:hover {
+        transform: scale(1.03);
+    }
+
+    .tabs {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+    }
+
+    .tab-button {
+        background: #004d00;
+        color: yellow;
+        padding: 12px 25px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .tab-button:hover {
+        background: yellow;
+        color: #004d00;
+        transform: scale(1.05);
+    }
+
+    .content {
+        display: none;
+        padding: 25px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .active {
+        display: block;
+    }
+
+    .course-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .course-btn {
+        background: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .course-btn:hover {
+        background: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .description {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #333;
+        font-weight: bold;
+        line-height: 1.5;
+    }
+
+    .apply-button {
+        display: inline-block;
+        background: #f1e025;
+        color: #004d00;
+        padding: 12px 25px;
+        margin-top: 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .apply-button:hover {
+        background: yellow;
+        color: black;
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="programs-container">
+    <h1 class="program-title">Programs Offered</h1>
+
+    <div class="image-container">
+        <img id="courseImage" class="course-img" src="/static/images/default.jpg" alt="Course Image">
+    </div>
+
+    <div class="tabs">
+        <button class="tab-button" onclick="showContent('shs')">Senior High School</button>
+        <button class="tab-button" onclick="showContent('bs')">Bachelor's Degree</button>
+        <button class="tab-button" onclick="showContent('tesda')">TESDA Courses</button>
+    </div>
+</div>
+
+<div id="shs" class="content">
+    <h2>Senior High School Strands</h2>
+    <div class="course-buttons">
+        <button class="course-btn" onclick="updateCourse('shs_abm.jpg', 'ABM', 'Dreaming of a successful business empire? The ABM strand hones your skills in finance, entrepreneurship, and marketing to prepare you for a competitive corporate world!')">ABM</button>
+        <button class="course-btn" onclick="updateCourse('shs_tvl.jpg', 'TVL', 'Master hands-on skills in automotive, electronics, culinary, and more! TVL is perfect for those who want practical, in-demand job-ready skills.')">TVL</button>
+        <button class="course-btn" onclick="updateCourse('shs_humss.jpg', 'HUMSS', 'Do you love public speaking, psychology, or journalism? HUMSS is designed for aspiring leaders, social workers, and influencers of the future!')">HUMSS</button>
+        <button class="course-btn" onclick="updateCourse('shs_gas.jpg', 'GAS', 'Unsure about your career path? The GAS strand gives you a balanced mix of subjects to help you explore different career possibilities!')">GAS</button>
+    </div>
+</div>
+
+<div id="bs" class="content">
+    <h2>Bachelor’s Degree Programs</h2>
+    <div class="course-buttons">
+        <button class="course-btn" onclick="updateCourse('bs_hospitality.jpg', 'BS in Hospitality Management', 'Travel the world with a degree in hospitality! Learn hotel management, tourism operations, and luxury customer service.')">BS in Hospitality Management</button>
+        <button class="course-btn" onclick="updateCourse('bs_comsci.jpg', 'BS in Computer Science', 'Love coding and technology? Master programming, cybersecurity, and AI development with a BS in Computer Science!')">BS in Computer Science</button>
+        <button class="course-btn" onclick="updateCourse('bs_business.jpg', 'BS in Business Administration', 'Be the CEO of your own company! Learn management, marketing, and entrepreneurship with a BS in Business Administration!')">BS in Business Administration</button>
+    </div>
+</div>
+
+<div id="tesda" class="content">
+    <h2>TESDA Certificate Courses</h2>
+    <div class="course-buttons">
+        <button class="course-btn" onclick="updateCourse('tesda_cookery.jpg', 'Cookery NCII', 'Turn your passion for food into a career! Learn professional cooking techniques and become a world-class chef!')">Cookery NCII</button>
+        <button class="course-btn" onclick="updateCourse('tesda_caregiving.jpg', 'Caregiving NCII', 'Make a difference in people’s lives! Gain skills in elderly and child care and start a meaningful career in caregiving.')">Caregiving NCII</button>
+    </div>
+</div>
+
+<script>
+function showContent(id) {
+    document.querySelectorAll('.content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+}
+
+function updateCourse(image, title, description) {
+    let courseImage = document.getElementById('courseImage');
+    courseImage.src = `/static/images/${image}`;
+
+    let content = document.querySelector('.content.active');
+
+    if (!content) return; // Ensure a tab is active before updating
+
+    // Remove old description and apply button if they exist
+    let oldDescription = content.querySelector('.description');
+    let oldApplyButton = content.querySelector('.apply-button');
+    if (oldDescription) oldDescription.remove();
+    if (oldApplyButton) oldApplyButton.remove();
+
+    // Create new description
+    let descElement = document.createElement("p");
+    descElement.className = "description";
+    descElement.textContent = description;
+    content.appendChild(descElement);
+
+    // Create "Apply Now" button
+    let applyButton = document.createElement("a");
+    applyButton.className = "apply-button";
+    applyButton.href = "#";
+    applyButton.textContent = "Apply Now";
+    content.appendChild(applyButton);
+}
+
+</script>
+
+{% include 'myapp/footer.html' %}
