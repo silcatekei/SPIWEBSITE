@@ -16,12 +16,26 @@
 body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
+    color: white;
+    min-height: 100vh; /* Changed from height to min-height */
+    position: relative;
+    overflow-x: hidden; /* Prevents horizontal scrolling but allows vertical scrolling */
+}
+
+body::before {
+    content: "";
+    position: fixed; /* Ensures the background stays fixed while scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: url('https://i.ibb.co/V05HRwS4/Beige-Blue-Aesthetic-Mood-Board-Minimalist-Photo-Collage-Banner.jpg') 
                 no-repeat center center fixed;
-    background-size: contain; /* Ensures the whole image fits without cropping */
-    color: white;
-    height: 100vh; /* Makes sure it covers the full viewport height */
+    background-size: cover; /* Changed from contain to cover */
+    filter: blur(10px);
+    z-index: -1;
 }
+
         /* Header & Navigation */
         header {
             background: rgba(7, 119, 69, 0.9);
