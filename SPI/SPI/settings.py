@@ -56,7 +56,7 @@ ROOT_URLCONF = 'SPI.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'], # BASE_DIR is your root where settings.py exists
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,10 +64,25 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'myapp.context_processors.slider_images',  
             ],
         },
     },
 ]
+
+STATIC_URL = '/static/'
+
+# Add this line to point Django to your static folder
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'myapp/static'),
+]
+
+# For production, also collect static files into STATIC_ROOT
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+
+
 WSGI_APPLICATION = 'SPI.wsgi.application'
 
 

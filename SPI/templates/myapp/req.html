@@ -51,16 +51,18 @@
     }
 
     .content-box {
-        display: none; /* Hide all sections by default */
-        padding: 25px;
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-        max-width: 900px;
-        margin: auto;
-        min-height: 300px;
-        text-align: left;
-    }
+    display: none;
+    padding: 25px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    min-width: 900px; /* Ensure width doesn't change */
+    margin: auto;
+    text-align: left;
+    min-height: 350px; /* Fixed height */
+    height: auto; /* Allows adjustment for content */
+}
 
     .content-box.active {
         display: block; /* Show only the active section */
@@ -99,10 +101,11 @@
         <div class="requirements-list">
             <h2>Requirements for New Students</h2>
             <ul>
-                <li>Form 138 (Report Card)</li>
                 <li>PSA Birth Certificate (Original & Photocopy)</li>
+                <li>PSA Marriage Certificate if Married(Photocopy)</li>
+                <li>Form 138 and 137</li>
                 <li>Certificate of Good Moral Character</li>
-                <li>2x2 ID Pictures (4 copies)</li>
+                <li>2x2 ID Pictures (2 copies)</li>
                 <li>Long Brown & White Envelopes</li>
                 <li>Filled-out Registration Form</li>
             </ul>
@@ -113,11 +116,12 @@
         <div class="requirements-list">
             <h2>Requirements for Transferees</h2>
             <ul>
+                <li>PSA Birth Certificate (Original & Photocopy)</li>
+                <li>PSA Marriage Certificate if Married(Photocopy)</li>
                 <li>Transcript of Records (TOR) or Certified True Copy of Grades</li>
                 <li>Certificate of Transfer/Honorable Dismissal</li>
-                <li>PSA Birth Certificate (Original & Photocopy)</li>
                 <li>Certificate of Good Moral Character</li>
-                <li>2x2 ID Pictures (4 copies)</li>
+                <li>2x2 ID Pictures (2 copies)</li>
                 <li>Long Brown & White Envelopes</li>
                 <li>Filled-out Registration Form</li>
             </ul>
@@ -128,10 +132,11 @@
         <div class="requirements-list">
             <h2>Requirements for TESDA Programs</h2>
             <ul>
-                <li>High School Diploma or ALS Certificate</li>
                 <li>PSA Birth Certificate (Original & Photocopy)</li>
+                <li>PSA Marriage Certificate if Married(Photocopy)</li>
+                <li>High School Diploma or ALS Certificate</li>
                 <li>Barangay Clearance</li>
-                <li>2x2 ID Pictures (4 copies, white background)</li>
+                <li>2x2 ID Pictures (2 copies, white background)</li>
                 <li>Medical Certificate (Fit to Work)</li>
                 <li>Filled-out Registration Form</li>
             </ul>
@@ -140,15 +145,37 @@
 </div>
 
 <script>
-    function showContent(id) {
-        // Hide all content boxes
-        document.querySelectorAll('.content-box').forEach(box => {
-            box.classList.remove('active');
-        });
 
-        // Show the selected one
-        document.getElementById(id).classList.add('active');
+function showContent(id) {
+    let allBoxes = document.querySelectorAll('.content-box');
+    let allButtons = document.querySelectorAll('.tab-button');
+    
+    // Hide all content boxes
+    allBoxes.forEach(box => box.classList.remove('active'));
+
+    // Remove active class from all buttons
+    allButtons.forEach(button => button.classList.remove('active'));
+
+    // Show the selected content box
+    let selectedBox = document.getElementById(id);
+    selectedBox.classList.add('active');
+
+    // Find the corresponding button and add active class
+    let selectedButton = document.querySelector(`button[onclick="showContent('${id}')"]`);
+    if (selectedButton) {
+        selectedButton.classList.add('active');
     }
+
+    // Adjust heights for consistent layout
+    let maxHeight = Math.max(...Array.from(allBoxes).map(box => box.scrollHeight));
+    allBoxes.forEach(box => box.style.height = maxHeight + 'px');
+}
+
+// Ensure height is adjusted and first button is highlighted on load
+window.onload = function() {
+    showContent('new-student');
+};
+
 </script>
 
 {% include 'myapp/footer.html' %}

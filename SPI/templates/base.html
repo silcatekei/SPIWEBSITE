@@ -1,200 +1,159 @@
 {% load static %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Page</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .navbar { background-color: white; }
+
+        .choose-spi {
+            text-align: center;
+            font-size: 5rem;
+            font-weight: bold;
+            color: gold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+            position: relative;
+        }
+        .choose-spi::after {
+            content: '';
+            display: block;
+            width: 400px;
+            height: 4px;
+            background: gold;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .video-container { text-align: center; padding: 40px 0; }
+        .video-container video { width: 40%; border-radius: 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.2); }
+
+        .apply-btn-container { text-align: center; margin-top: 20px; }
+        .apply-btn {
+            background-color: gold;
+            color: black;
+            padding: 15px 30px;
+            font-size: 1.8rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        .apply-btn:hover { background-color: darkgoldenrod; }
+
+        .scroll-section { padding: 80px 0; transition: background-color 0.5s ease-in-out; }
+        .scroll-section:nth-child(odd) { background-color: rgba(0,128,0,0.1); }
+        .scroll-section:nth-child(even) { background-color: rgba(255,215,0,0.1); }
+
+        /* Swiper Container - Center & Remove Side Previews */
+        .swiper-container {
+            width: 80%;
+            max-width: 1000px;
+            margin: auto;
+            overflow: hidden; /* Prevents extra images from showing */
+        }
+
+        /* Single Image Per View & Enlarged Image */
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .swiper-slide img {
+            max-width: 100%;
+            max-height: 600px; /* Doubled from 300px */
+            object-fit: contain; /* Prevents cropping */
+            border-radius: 10px;
+        }
+    </style>
+</head>
 <body>
+    {% include 'myapp/header.html' %}
+    {% include 'myapp/nav.html' %}
+    
+    <!-- Choose SPI Title -->
+    <h2 class="choose-spi">Choose SPI</h2>
+    
+    <!-- Video Section -->
+    <div class="video-container">
+        <video controls autoplay loop>
+            <source src="{% static 'videos/bini.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <!-- Apply Now Button -->
+    <div class="apply-btn-container">
+        <a href="{% url 'apply_online' %}" class="apply-btn">Apply Now</a>
+    </div>
+    
+    <!-- Scrolling Sections -->
+    <div class="scroll-section text-center">
+        <h2>Special Offers</h2>
 
-
-
-    <!-- Header -->
-    {% include 'myapp/header.html' %}  
-
-    <!-- Navigation -->
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAbout" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            About
+        <!-- Swiper.js Carousel -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for image in image_files %}
+                    <div class="swiper-slide">
+                        <a href="{% url 'apply_online' %}">
+                            <img src="{% static image %}" alt="Special Offer">
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
-                            <li><a class="dropdown-item" href="{% url 'about' %}">About Us</a></li>
-                            <li><a class="dropdown-item" href="{% url 'mission' %}">Mission & Vision</a></li>
-                            <li><a class="dropdown-item" href="{% url 'history' %}">History</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmissions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Admissions
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownAdmissions">
-                            <li><a class="dropdown-item" href="{% url 'requirements' %}">Requirements</a></li>
-                            <li><a class="dropdown-item" href="{% url 'application_process' %}">Application Process</a></li>
-                            <li><a class="dropdown-item" href="{% url 'tuition' %}">Tuition & Fees</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAcademics" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Academics
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownAcademics">
-                            <li><a class="dropdown-item" href="{% url 'programs' %}">Programs Offered</a></li>
-                            <li><a class="dropdown-item" href="{% url 'faculty' %}">Faculty</a></li>
-                            <li><a class="dropdown-item" href="{% url 'calendar' %}">Academic Calendar</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                    </li>
-                </ul>
+                    </div>
+                {% endfor %}
             </div>
-        </div>
-    </nav>
 
-<!-- Slider -->
-<div id="schoolCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-      <!-- First Image (Active) -->
-      <div class="carousel-item active">
-          <img src="{% static 'images/slider/enrollment.jpg' %}" class="d-block w-100" 
-              alt="School Image 1" style="object-fit: contain; width: 100%; height: auto; max-height: 500px;">
-      </div>
-      <!-- Second Image (DO NOT set active here) -->
-      <div class="carousel-item">
-          <img src="{% static 'images/slider/enrollment1.jpg' %}" class="d-block w-100" 
-              alt="School Image 2" style="object-fit: contain; width: 100%; height: auto; max-height: 500px;">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'images/slider/enrollment3.png' %}" class="d-block w-100" 
-            alt="School Image 2" style="object-fit: contain; width: 100%; height: auto; max-height: 500px;">
+            <!-- Swiper Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
     </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#schoolCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#schoolCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-  </button>
-</div>
 
-    <!-- Icons Row -->
-    <div class="icons-row">
-      <a href="{% url 'quick_links' %}">
-          <i class="fas fa-university"></i>
-          SPI Portal
-      </a>
-      <a href="{% url 'apply_online' %}">
-          <i class="fas fa-edit"></i>
-          Apply Online
-      </a>
-      <a href="#">
-          <i class="fas fa-user-plus"></i>
-          Enroll Online
-      </a>
-  </div>
-
-<!-- CARDS -->
-<div class="container px-4 py-5" id="custom-cards">
-
-    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-      <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h3>
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                <small>Earth</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                <small>3d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-2.jpg');">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Much longer title that wraps to multiple lines</h3>
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                <small>Pakistan</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                <small>4d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-3.jpg');">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Another longer title belongs here</h3>
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                <small>California</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                <small>5d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <div class="scroll-section text-center">
+        <h2>Latest News</h2>
+        <p>Check out our latest announcements.</p>
     </div>
-  </div>
-    <!-- Main Content -->
-    <main class="container py-4">
-        {% block content %}
-        {% endblock %}
-    </main>
+
+    <div class="scroll-section text-center">
+        <h2>Upcoming Events</h2>
+        <p>Don’t miss our orientation and campus tour.</p>
+    </div>
 
     <!-- Footer -->
     {% include 'myapp/footer.html' %}
 
+    <!-- Bootstrap & Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
     <script>
-        $(document).ready(function() {
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 100) {
-                    console.log('Scrolled');
-                    $('#navbar').addClass('navbar-sticky');
-                    $('#navbar').removeClass('navbar-original');
-                } else {
-                    $('#navbar').removeClass('navbar-sticky');
-                    $('#navbar').addClass('navbar-original');
-                }
-            });
+        var swiper = new Swiper('.swiper-container', {
+            loop: true,  // Infinite loop
+            autoplay: { delay: 3000 },  // Auto-slide every 3s
+            slidesPerView: 1,  // **Only one image visible at a time**
+            centeredSlides: true,  // **Fully centers each slide**
+            navigation: {  // Next/Prev Buttons
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
         });
     </script>
-    {% block scripts %}{% endblock %}
+
 </body>
 </html>
