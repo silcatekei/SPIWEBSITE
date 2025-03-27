@@ -1,0 +1,79 @@
+{% load static %}
+{% include 'myapp/header.html' %}
+{% include 'myapp/nav.html' %}
+
+<h1>SPI Angeles Branch</h1>
+
+<!-- Placeholder for Branch Image -->
+<img src="{% static 'images/spiangeles.jpg' %}" alt="SPI Angeles Branch" style="width:100%;height:auto;">
+
+<h2>Contact Details</h2>
+<p><strong>Address:</strong>  #655 San Martin St. San Angelo Subd. Sto. Domingo, Angeles City. (Infront of Carmelite Church)</p>
+<p><strong>Phone:</strong> 0918 944 7532</p>
+<p><strong>Email:</strong>spiac_reg@yahoo.com</p>
+
+<h2>Google Maps Location</h2>
+<!-- Embed Google Maps Iframe -->
+<iframe src="https://www.google.com/maps/embed?pb=!4v1743057135807!6m8!1m7!1sx2-zARI4VPRJDnuLu9yVnQ!2m2!1d15.12903640146717!2d120.5957227900295!3f29.973711349641828!4f-0.5191223029326153!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<h2>Brief History</h2>
+<p>Established to serve the community in Pampanga, the Angeles branch of Skill Power Institute focuses on providing top-notch education and training programs.</p>
+<style>
+    /* Use a modern font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    /* Apply font globally */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        color: #f2ee0c;
+        line-height: 1.6;
+    }
+
+    /* Center and limit image size */
+    img {
+        display: block;
+        max-width: 60%;
+        height: auto;
+        margin: 20px auto;
+        border-radius: 10px; /* Rounded corners for better look */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Headings */
+    h1 {
+        text-align: center;
+        font-size: 5em;
+        font-weight: 600;
+        color: #e6ec39;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        color: #e6ec39;
+        border-bottom: 2px solid #06701a;
+        padding-bottom: 5px;
+        margin-top: 20px;
+    }
+
+    /* Improve text readability */
+    p {
+        font-size: 1.1em;
+        text-align: justify;
+        max-width: 800px;
+        margin: 10px auto;
+        padding: 10px;
+    }
+
+    /* Style for iframe (Google Maps) */
+    iframe {
+        display: block;
+        max-width: 100%;
+        margin: 20px auto;
+        border-radius: 10px;
+    }
+</style>
+
+
+{% include 'myapp/footer.html' %}

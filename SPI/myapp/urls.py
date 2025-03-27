@@ -1,7 +1,8 @@
 # myapp/urls.py
 from django.urls import path
-from . import views
 from django.contrib.auth import views as auth_views
+from . import views  # Import the whole module
+
 
 urlpatterns = [
     path('', views.home, name='home'),  # Home page
@@ -29,4 +30,8 @@ urlpatterns = [
     path('accept_application/<int:application_id>/', views.accept_application, name='accept_application'),
     path('reject_application/<int:application_id>/', views.reject_application, name='reject_application'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('spiantipolo/', views.spiantipolo, name='spiantipolo'),
+    path('spiqc/', views.spiqc, name='spiqc'),
+    path('spicabanatuan/', views.spicabanatuan, name='spicabanatuan'),
+    path('spiangeles/', views.spiangeles, name='spiangeles'),
 ]

@@ -50,6 +50,21 @@ def contact(request):
 def quick_links(request):
     return render(request, 'myapp/quick_links.html')
 
+def spiantipolo(request):
+    return render(request, 'myapp/spiantipolo.html')
+
+def spiqc(request):
+    return render(request, 'myapp/spiqc.html')
+
+def spicabanatuan(request):
+    return render(request, 'myapp/cabanatuan.html')
+
+def spiangeles(request):
+    return render(request, 'myapp/angeles.html')
+
+
+
+
 # --- Apply Online View ---
 def apply_online(request):
     if request.method == 'POST':

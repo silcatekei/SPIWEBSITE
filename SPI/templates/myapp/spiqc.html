@@ -1,0 +1,78 @@
+{% load static %}
+{% include 'myapp/header.html' %}
+{% include 'myapp/nav.html' %}
+
+<h1>SPI Quezon City Branch</h1>
+
+<!-- Placeholder for Branch Image -->
+<img src="{% static 'images/spiqc.jpg' %}" alt="SPI Quezon City Branch" style="width:100%;height:auto;">
+
+<h2>Contact Details</h2>
+<p><strong>Address:</strong> North Ave. Cor, Agham Rd. (in front of Veterans Hospital) Diliman, Quezon City, Philippines</p>
+<p><strong>Phone:</strong> 426-7940, 0918-6741165, 0927-7440622, 0921-3241736. </p>
+<p><strong>Email:</strong> spiqc_marketing@spi.edu.ph</p>
+
+<h2>Google Maps Location</h2>
+<!-- Embed Google Maps Iframe -->
+<iframe src="https://www.google.com/maps/embed?pb=!4v1743056508428!6m8!1m7!1s6QHHRySEgfkQVW4Pe2nP_Q!2m2!1d14.65354008133427!2d121.0394501519235!3f206.2874!4f0!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<h2>Brief History</h2>
+<p>The Quezon City branch of Skill Power Institute was founded to extend quality education services to the residents of Metro Manila, fostering a community of skilled professionals.</p>
+<style>
+    /* Use a modern font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    /* Apply font globally */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        color: #f2ee0c;
+        line-height: 1.6;
+    }
+
+    /* Center and limit image size */
+    img {
+        display: block;
+        max-width: 60%;
+        height: auto;
+        margin: 20px auto;
+        border-radius: 10px; /* Rounded corners for better look */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Headings */
+    h1 {
+        text-align: center;
+        font-size: 5em;
+        font-weight: 600;
+        color: #e6ec39;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        color: #e6ec39;
+        border-bottom: 2px solid #06701a;
+        padding-bottom: 5px;
+        margin-top: 20px;
+    }
+
+    /* Improve text readability */
+    p {
+        font-size: 1.1em;
+        text-align: justify;
+        max-width: 800px;
+        margin: 10px auto;
+        padding: 10px;
+    }
+
+    /* Style for iframe (Google Maps) */
+    iframe {
+        display: block;
+        max-width: 100%;
+        margin: 20px auto;
+        border-radius: 10px;
+    }
+</style>
+
+{% include 'myapp/footer.html' %}
