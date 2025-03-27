@@ -201,3 +201,14 @@ def application_confirmation(request, application_id):
 
     context = {'application': application}
     return render(request, 'myapp/application_confirmation.html', context)
+
+def edit_application(request, application_id):
+    application = get_object_or_404(Application, pk=application_id)
+    if request.method == 'POST':
+        form = ApplicationForm(request.POST, instance=application)  # Use instance=application to update
+        if form.is_valid():
+            form.save()
+            return redirect('admin_dashboard')  # Or wherever you want to redirect
+    else:
+        form = ApplicationForm(instance=application)
+    return render(request, 'myapp/edit_application.html', {'form': form, 'application': application})

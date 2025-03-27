@@ -34,4 +34,5 @@ urlpatterns = [
     path('spiqc/', views.spiqc, name='spiqc'),
     path('spicabanatuan/', views.spicabanatuan, name='spicabanatuan'),
     path('spiangeles/', views.spiangeles, name='spiangeles'),
+    path('application/edit/<int:application_id>/', views.edit_application, name='edit_application'),
 ]

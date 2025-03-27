@@ -13,3 +13,4 @@ class ApplicationForm(forms.ModelForm):
             'contact_number': forms.TextInput(attrs={'class': 'form-control'}),
             'previous_school': forms.TextInput(attrs={'class': 'form-control'}),
         }
+        
