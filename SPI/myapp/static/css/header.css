@@ -1,0 +1,78 @@
+/* ==============================
+   HEADER & NAVIGATION STYLES
+   ============================== */
+
+/* General Header Styling */
+header {
+    background: rgba(7, 119, 69, 0.9);
+    padding: 20px 0;
+    text-align: right;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+body::before {
+    content: "";
+    position: fixed; /* Ensures the background stays fixed while scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.ibb.co/V05HRwS4/Beige-Blue-Aesthetic-Mood-Board-Minimalist-Photo-Collage-Banner.jpg') 
+                no-repeat center center fixed;
+    background-size: cover; /* Changed from contain to cover */
+    filter: blur(10px);
+    z-index: -1;
+}
+
+
+/* ==============================
+   TOP BAR STYLING
+   ============================== */
+.top-bar {
+    background-color: #257947; /* Match design */
+    color: white;
+    padding: 10px 0;
+}
+
+/* Align the top bar content */
+.top-bar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo Styling */
+.top-bar img {
+    height: 100px; /* Slightly bigger logo */
+}
+
+/* Navigation Links */
+.top-bar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem; /* Increased font size */
+    margin: 0 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+.top-bar a:hover {
+    text-decoration: underline;
+    color: #fccd33; /* Optional: Change color on hover */
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+   ============================== */
+@media (max-width: 768px) {
+    .top-bar .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .top-bar a {
+        font-size: 1rem; /* Slightly smaller for mobile */
+        margin: 5px 0;
+    }
+}

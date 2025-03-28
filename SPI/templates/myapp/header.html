@@ -5,112 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKILL POWER INSTITUTE</title>
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Custom Stylesheets -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">  <!-- Added header.css -->
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     {% block head %}{% endblock %}
-
-    <style>
-
-body {
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    color: white;
-    min-height: 100vh; /* Changed from height to min-height */
-    position: relative;
-    overflow-x: hidden; /* Prevents horizontal scrolling but allows vertical scrolling */
-}
-
-body::before {
-    content: "";
-    position: fixed; /* Ensures the background stays fixed while scrolling */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://i.ibb.co/V05HRwS4/Beige-Blue-Aesthetic-Mood-Board-Minimalist-Photo-Collage-Banner.jpg') 
-                no-repeat center center fixed;
-    background-size: cover; /* Changed from contain to cover */
-    filter: blur(10px);
-    z-index: -1;
-}
-
-        /* Header & Navigation */
-        header {
-            background: rgba(7, 119, 69, 0.9);
-            padding: 20px 0;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 20vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            flex-direction: column;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        .hero h1 {
-            font-size: 50px;
-            font-family: 'Bitter', serif;
-            margin-bottom: 10px;
-        }
-        .hero p {
-            font-size: 20px;
-            color: #fccd33;
-        }
-        /* Top bar styling */
-        .top-bar {
-            background-color: #257947; /* Match design */
-            color: white;
-            padding: 10px 0;
-        }
-
-        /* Align the header content */
-        .top-bar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Logo styling */
-        .top-bar img {
-            height: 100px; /* Slightly bigger logo */
-        }
-
-        /* Font size adjustments */
-        .top-bar a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem; /* Increased font size */
-            margin: 0 15px;
-        }
-
-        .top-bar a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .top-bar .container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .top-bar a {
-                font-size: 1rem; /* Slightly smaller for mobile */
-                margin: 5px 0;
-            }
-        }
-    </style>
-
 </head>
 <body>
 
@@ -122,12 +31,11 @@ body::before {
         </a>
         
         <!-- Top bar links on the right -->
-        <div>
+        <nav>
             <a href="#">SPI Antipolo</a>
-            <a href="{% url 'apply_online' %}" id="applyOnlineIconBtn" class="ms-3">Apply Now</a>
-            <a href="{% url 'quick_links' %}" id="" class="ms-3">Portals</a>
-        </div>
-        
+            <a href="{% url 'apply_online' %}" class="ms-3">Apply Now</a>
+            <a href="{% url 'quick_links' %}" class="ms-3">Portals</a>
+        </nav>
     </div>
 </header>
 

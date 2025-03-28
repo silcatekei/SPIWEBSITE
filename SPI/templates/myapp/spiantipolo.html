@@ -1,84 +1,45 @@
 {% load static %}
-{% include 'myapp/header.html' %}
-{% include 'myapp/nav.html' %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPI Antipolo </title>
 
-<h1>SPI Antipolo Branch</h1>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- Placeholder for Branch Image -->
-<img src="{% static 'images/spiantipolo.jpg' %}" alt="SPI Antipolo Branch" style="width:100%;height:auto;">
+    <!-- Link Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/branches.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"> <!-- Ensure this exists for nav/footer styling -->
+</head>
+<body>
+    {% include 'myapp/header.html' %}
+    {% include 'myapp/nav.html' %}
 
-<h2>Contact Details</h2>
-<p><strong>Address:</strong> 47 Manuel L. Quezon Ext, Dalig, Antipolo, 1870 Rizal</p>
-<p><strong>Phone:</strong> Mobile - 0905 317 2869 | Tel - (02) 8570-2298</p>
-<p><strong>Email:</strong> mktg.skillpowerinstitute@gmail.com</p>
+    <!-- Start of Branch Content -->
+    <div class="branch-content">
+    <h1>SPI Antipolo Branch</h1>
 
-<h2>Google Maps Location</h2>
-<!-- Embed Google Maps Iframe -->
-<iframe src="https://www.google.com/maps/embed?pb=!4v1743056203604!6m8!1m7!1sNt_uevF8tdv0IErJ6xaO6w!2m2!1d14.57525655011916!2d121.1767021572761!3f245.58475368945489!4f-2.8032465410687593!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-<h2>Brief History</h2>
-<p>Skill Power Institute-Antipolo was established in 1997 to provide quality education and training to the community. Over the years, it has grown to become a reputable institution in the region.</p>
-<style>
-    /* Use a modern font */
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    <!-- Branch Image -->
+    <img src="{% static 'images/spiantipolo.jpg' %}" alt="SPI Antipolo Branch" class="branch-image">
 
-    /* Apply font globally */
-    body {
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f8f9fa;
-        color: #f2ee0c;
-        line-height: 1.6;
-    }
+    <h2>Contact Details</h2>
+    <p><strong>Address:</strong> 47 Manuel L. Quezon Ext, Dalig, Antipolo, 1870 Rizal</p>
+    <p><strong>Phone:</strong> Mobile - 0905 317 2869 | Tel - (02) 8570-2298</p>
+    <p><strong>Email:</strong> <a href="mailto:mktg.skillpowerinstitute@gmail.com">mktg.skillpowerinstitute@gmail.com</a></p>
 
-    /* Center and limit image size */
-    img {
-        display: block;
-        max-width: 100%;
-        height: auto;
-        margin: 20px auto;
-        border-radius: 10px; /* Rounded corners for better look */
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    img:not(.nav-logo) {
-    max-width: 60%;
-    }
+    <h2>Google Maps Location</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!4v1743056203604!6m8!1m7!1sNt_uevF8tdv0IErJ6xaO6w!2m2!1d14.57525655011916!2d121.1767021572761!3f245.58475368945489!4f-2.8032465410687593!5f0.7820865974627469"
+            class="map-frame" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
 
+    <h2>Brief History</h2>
+    <p>Skill Power Institute-Antipolo was established in 1997 to provide quality education and training to the community. Over the years, it has grown to become a reputable institution in the region.</p>
+    </div>
+    <!-- End of Branch Content -->
 
-    /* Headings */
-    h1 {
-        text-align: center;
-        font-size: 5em;
-        font-weight: 600;
-        color: #e6ec39;
-    }
-
-    h2 {
-        font-size: 2em;
-        color: #e6ec39;
-        border-bottom: 2px solid #06701a;
-        padding-bottom: 5px;
-        margin-top: 20px;
-        text-align: center;
-    }
-
-    /* Improve text readability */
-    p {
-        font-size: 1.1em;
-        text-align: justify;
-        max-width: 800px;
-        margin: 10px auto;
-        padding: 10px;
-    }
-
-    /* Style for iframe (Google Maps) */
-    iframe {
-        display: block;
-        max-width: 100%;
-        margin: 20px auto;
-        border-radius: 10px;
-    }
-</style>
-{% include 'myapp/footer.html' %}
+    {% include 'myapp/footer.html' %}
+</body>
+</html>
