@@ -34,12 +34,17 @@
     /* Center and limit image size */
     img {
         display: block;
-        max-width: 60%;
+        max-width: 100%;
         height: auto;
         margin: 20px auto;
         border-radius: 10px; /* Rounded corners for better look */
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
+    
+    img:not(.nav-logo) {
+    max-width: 60%;
+    }
+
 
     /* Headings */
     h1 {
@@ -50,11 +55,12 @@
     }
 
     h2 {
-        font-size: 1.5em;
+        font-size: 2em;
         color: #e6ec39;
         border-bottom: 2px solid #06701a;
         padding-bottom: 5px;
         margin-top: 20px;
+        text-align: center;
     }
 
     /* Improve text readability */
