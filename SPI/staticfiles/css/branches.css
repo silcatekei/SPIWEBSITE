@@ -1,0 +1,106 @@
+/* Import modern fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Scope to branch content only */
+.branch-content {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Headings */
+.branch-content h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+    color: #ffcc00;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    margin-top: 30px;
+}
+
+.branch-content h2 {
+    font-size: 2.2em;
+    color: #f8f9fa;
+    background-color: rgba(38, 70, 38, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+    margin: 20px auto;
+    border-bottom: 3px solid #ffcc00;
+}
+
+/* Paragraphs */
+.branch-content p {
+    font-size: 1.2em;
+    text-align: justify;
+    max-width: 850px;
+    margin: 15px auto;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    color: #fff9c4;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Links */
+.branch-content a {
+    color: #ffcc00;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.branch-content a:hover {
+    color: #fff9c4;
+    text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.8);
+}
+
+/* Image Styling */
+.branch-content .branch-image {
+    display: block;
+    max-width: 55%;
+    height: auto;
+    margin: 30px auto;
+    border-radius: 15px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    border: 4px solid #ffcc00;
+    transition: transform 0.3s ease-in-out;
+}
+
+.branch-content .branch-image:hover {
+    transform: scale(1.05);
+}
+
+/* Google Maps Iframe */
+.branch-content .map-frame {
+    display: block;
+    width: 80%;
+    height: 450px;
+    margin: 30px auto;
+    border-radius: 15px;
+    border: 3px solid #ffcc00;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .branch-content h1 {
+        font-size: 2.8em;
+    }
+
+    .branch-content h2 {
+        font-size: 1.8em;
+    }
+
+    .branch-content p {
+        font-size: 1.1em;
+        padding: 12px;
+    }
+
+    .branch-content .branch-image,
+    .branch-content .map-frame {
+        width: 90%;
+    }
+}

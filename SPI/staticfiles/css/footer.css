@@ -1,0 +1,99 @@
+/* Ensure the page stretches to full height */
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif; /* Modern font */
+}
+
+/* Push main content to ensure footer stays at the bottom */
+main {
+    flex: 1;
+}
+
+/* Footer styles */
+footer {
+    background-color: #1b5e20;
+    color: #ffcc00;
+    padding: 50px 80px;
+    display: flex;
+    justify-content: center; /* Center columns */
+    align-items: flex-start;
+    flex-wrap: wrap;
+    border-top: 5px solid #ffcc00;
+    font-size: 16px;
+    text-align: left;
+    gap: 50px; /* Add equal spacing between columns */
+}
+
+
+/* Footer section layout */
+footer div {
+    flex: 1;
+    max-width: 30%;
+    padding: 10px;
+}
+
+
+/* Footer titles */
+footer div p:first-child {
+    font-size: 20px;
+    color: #ffcc00;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Footer links */
+footer a {
+    color: #cba40b;
+    text-decoration: none;
+    display: block;
+    margin: 8px 0;
+    transition: 0.3s ease-in-out;
+}
+
+/* Hover effect for footer links */
+footer a:hover {
+    color: #ffd700; /* Brighter gold */
+    text-shadow: 1px 1px 5px rgba(255, 204, 0, 0.6);
+    transform: scale(1.05);
+}
+
+/* Contact details */
+footer div p {
+    margin: 6px 0;
+    line-height: 1.5;
+}
+
+/* Social media icons */
+footer .social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+footer .social-icons a {
+    font-size: 24px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    footer {
+        padding: 30px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    footer div {
+        max-width: 100%;
+        margin: 15px 0;
+    }
+
+    footer .social-icons {
+        justify-content: center;
+    }
+}

@@ -1,0 +1,213 @@
+/* Custom CSS for Header */
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: start; /* Align logo to the left */
+}
+
+header img {
+    height: 90px; /* Increased size by 10px */
+}
+
+/* Custom CSS for Navigation and Slider */
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-item {
+    margin: 0 15px;
+}
+
+.nav-link {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Hover Dropdowns */
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown > .dropdown-toggle:active {
+    pointer-events: none;
+}
+
+/* Remove Dropdown Arrows */
+.dropdown-toggle::after {
+    display: none;
+}
+
+/* Improved Dropdown Menu Design */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    border-radius: 5px;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Slider Styles */
+.carousel-item img {
+    object-fit: cover;
+    height: 400px;
+    width: 100%;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Icons Row Styling */
+.icons-row {
+    background-color: #257947;  
+    color: white;
+    padding: 30px 0;  
+    text-align: center;
+    border-radius: 10px;
+    margin: 10px auto;
+    width: 80%;
+    background: linear-gradient(to bottom, #257947, #257947);
+}
+
+.icons-row a {
+    color: white;
+    text-decoration: none;
+    margin: 0 30px;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.icons-row a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.icons-row i {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Improved Top Bar */
+.top-bar {
+    background-color: #257947;
+    color: #f8f9fa;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.top-bar a {
+    color: #f8f9fa;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.top-bar a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Portal Links Section */
+.portal-links {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.portal-card {
+    display: inline-block;
+    width: 200px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    color: #343a40;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.portal-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.portal-card i {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Sticky Navbar */
+.navbar-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-original {
+    position: relative;
+}
+
+/* Form Styling */
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating {
+    margin-bottom: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}

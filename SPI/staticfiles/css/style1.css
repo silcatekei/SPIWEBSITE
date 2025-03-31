@@ -1,0 +1,81 @@
+body {
+    background: linear-gradient(135deg, #257947, #257947); /* Softer gradient */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally and vertically */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mica-container {
+    max-width: 700px;
+    width: 90%; /* More responsive width */
+    padding: 30px;  /* Increase padding for better spacing */
+    border-radius: 20px;  /* More rounded corners */
+    background-color: rgba(255, 255, 255, 0.85); /* Slightly less transparent */
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.08); /* More pronounced shadow */
+    backdrop-filter: blur(12px);  /* Increase blur */
+    -webkit-backdrop-filter: blur(12px);  /* For Safari */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Stronger border */
+    margin: 20px auto; /* Add auto margins to center the block */
+
+}
+
+.home-logo a {
+    color: #343a40;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 25px;  /* Increase margin */
+    font-size: 1rem;
+}
+
+.home-logo i {
+    margin-right: 8px;
+}
+
+h1 {
+    color: #212529;
+    margin-bottom: 35px; /* Increase margin */
+    text-align: center;
+    font-size: 2.2rem; /* Adjust heading size */
+}
+
+.form-group {
+    margin-bottom: 25px;  /* Increase spacing */
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    font-size: 1.1rem; /* Adjust label size */
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    padding: 12px; /* Increase padding */
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.text-danger {
+    margin-top: 8px; /* Add spacing */
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 10px;
+    padding: 14px 24px; /* Increase padding */
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+    background-color: #257947;
+    border-color: #257947;
+}

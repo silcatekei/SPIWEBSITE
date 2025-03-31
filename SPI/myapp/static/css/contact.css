@@ -1,0 +1,135 @@
+/* Contact Us Page Styling */
+.contact-page {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    width: 80%;
+    max-width: 800px;
+}
+
+/* Page Title */
+.contact-page h1 {
+    color: #1B5E20; /* Dark Green */
+}
+
+/* Branch Sections */
+.contact-page .branch {
+    background-color: white;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    border-left: 5px solid #FFD700; /* Golden Yellow Accent */
+}
+
+/* Branch Headings */
+.contact-page .branch h2 {
+    color: #1B5E20; /* Dark Green */
+}
+
+/* Facebook Links */
+.contact-page .branch a {
+    color: #FFD700; /* Golden Yellow */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-page .branch a:hover {
+    text-decoration: underline;
+}
+
+/* Contact Form */
+.contact-form {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    border-top: 5px solid #1B5E20; /* Green Accent */
+}
+
+.contact-form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    display: block;
+    width: 100%;
+    background-color: #1B5E20; /* Green Button */
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.contact-form button:hover {
+    background-color: #145A32; /* Darker Green */
+}
+
+/* Google Map Styling */
+.map-container {
+    margin: 20px auto;
+    width: 100%;
+    max-width: 800px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Operating Hours */
+.operating-hours {
+    margin: 20px auto;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 5px solid #FFD700; /* Golden Yellow Accent */
+}
+
+/* Click-to-Call and Email */
+.contact-buttons {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.contact-buttons a {
+    display: inline-block;
+    background-color: #FFD700; /* Golden Yellow Button */
+    color: #1B5E20; /* Green Text */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.contact-buttons a:hover {
+    background-color: #FFC107; /* Slightly Darker Golden Yellow */
+}

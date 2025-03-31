@@ -1,0 +1,101 @@
+/* static/myapp/css/application_confirmation.css */
+
+/* Overall Container */
+.application-confirmation-container {
+  background-image: url('/static/myapp/images/mica-background.jpg'); /* Replace with your background image */
+  background-size: cover;
+  background-position: center;
+  padding: 40px 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.application-confirmation-content {
+  padding: 30px; /* Adjusted padding */
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  max-width: 900px;
+  width: 90%;
+  margin: 0 auto;
+  text-align: left;
+  position: relative; /* Needed for logo positioning */
+}
+
+/* School Logo */
+.school-logo {
+  position: absolute;
+  top: 15px;  /* Adjusted position */
+  right: 15px; /* Adjusted position */
+  width: 60px; /* Reduced size */
+  height: auto;
+  opacity: 0.75; /* Adjusted opacity */
+}
+
+/* Heading Styles */
+.application-confirmation-content h1 {
+  color: #212121;
+  margin-bottom: 20px; /* Adjusted spacing */
+  font-weight: 600;
+  font-size: 2.2em; /* Slightly reduced size */
+  text-align: center;
+  letter-spacing: -0.02em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.application-confirmation-content h2 {
+  color: #303f9f; /* Primary Color Accent */
+  margin-top: 25px; /* Adjusted spacing */
+  margin-bottom: 12px; /* Adjusted spacing */
+  font-size: 1.6em;
+  font-weight: 600;
+}
+
+/* Paragraph Styles */
+.application-confirmation-content p {
+  color: #424242;
+  margin-bottom: 15px; /* Adjusted spacing */
+  line-height: 1.7;
+  font-size: 1.1em;
+}
+
+/* List Styles */
+.application-confirmation-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px; /* Adjusted spacing */
+}
+
+.application-confirmation-content li {
+  color: #37474f;
+  margin-bottom: 8px;
+  font-size: 1.15em;
+}
+
+/* Strong Text Styles */
+.application-confirmation-content strong {
+  font-weight: 600;
+  color: #1a237e; /* Accent color */
+}
+
+/* Optional: Button Style */
+.application-confirmation-content .button {
+display: inline-block;
+padding: 10px 20px; /* Adjusted padding */
+background-color: #303f9f;
+color: #fff;
+text-decoration: none;
+border-radius: 8px;
+font-weight: 500;
+transition: background-color 0.2s ease;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.application-confirmation-content .button:hover {
+background-color: #1a237e;
+}
