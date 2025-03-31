@@ -29,8 +29,8 @@ def requirements(request):
 def application_process(request):
     return render(request, 'myapp/appprocess.html')
 
-def tuition(request):
-    return render(request, 'myapp/tf.html')
+def gallery(request):
+    return render(request, 'myapp/gallery.html')
 
 def academics(request):
     return render(request, 'myapp/academics.html')
