@@ -1,0 +1,109 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    /* Modified Background */
+    background: url('https://i.ibb.co/V05HRwS4/Beige-Blue-Aesthetic-Mood-Board-Minimalist-Photo-Collage-Banner.jpg') no-repeat center center fixed;
+    background-size: cover; /* Cover the entire area */
+    color: white;
+    min-height: 100vh; /* Use min-height for full viewport coverage */
+    overflow: auto; /* Enable scroll if content overflows */
+}
+
+/* Ensure the background is inherited correctly by the HTML element */
+html {
+    height: 100%;
+}
+
+/* Style to ensure content fills the viewport and background is visible */
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column; /* Optional: if you want to ensure footer stays at bottom */
+}
+
+/* Header & Navigation *
+
+/* Hero Section */
+.hero {
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.3); /* More subtle background */
+    backdrop-filter: blur(8px); /* Blur */
+    -webkit-backdrop-filter: blur(8px); /* For Safari */
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero h1 {
+    font-size: 50px;
+    font-family: 'Bitter', serif;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #fccd33;
+}
+
+/* Card Section */
+.deck {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 50px 20px;
+}
+
+.card-space {
+    perspective: 1200px;
+}
+
+.card {
+    width: 400px;
+    height: 450px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.card-space:hover .card {
+    transform: rotateY(180deg);
+}
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    backface-visibility: hidden;
+}
+
+.front {
+    background: linear-gradient(135deg, rgba(7, 119, 69, 0.7), rgba(5, 92, 52, 0.7)); /* Transparency */
+    color: #fccd33;
+    backdrop-filter: blur(8px); /* Blur */
+    -webkit-backdrop-filter: blur(8px); /* For Safari */
+}
+
+.back {
+    background: linear-gradient(135deg, rgba(252, 205, 51, 0.7), rgba(217, 168, 37, 0.7)); /* Transparency */
+    color: #077745;
+    transform: rotateY(180deg);
+    backdrop-filter: blur(8px); /* Blur */
+    -webkit-backdrop-filter: blur(8px); /* For Safari */
+}

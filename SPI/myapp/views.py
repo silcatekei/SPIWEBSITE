@@ -10,6 +10,8 @@ from .models import Application  # Import your Application model
 from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
+from .forms import ContactForm
+from .models import ContactMessage
 
 # --- Basic Page Views ---
 def home(request):
@@ -217,18 +219,25 @@ def reject_application(request, application_id):
 @login_required
 @user_passes_test(is_admin)
 def admin_home(request):
+    # Application Counts
     application_count = Application.objects.count()
     accepted_count = Application.objects.filter(status='accepted').count()
     rejected_count = Application.objects.filter(status='rejected').count()
     pending_count = Application.objects.filter(status='pending').count()
+    message_count = ContactMessage.objects.count()
+
+    # Recent Contact Messages
+    recent_messages = ContactMessage.objects.order_by('-timestamp')[:5]  # Get the 5 most recent messages
 
     context = {
         'application_count': application_count,
         'accepted_count': accepted_count,
         'rejected_count': rejected_count,
         'pending_count': pending_count,
+        'recent_messages': recent_messages,
+        'message_count': message_count,  # Add contact messages to the context
     }
-    return render(request, 'admin_home.html',context)
+    return render(request, 'admin_home.html', context)
 
 def application_confirmation(request, application_id):
     application = Application.objects.get(pk=application_id)
@@ -246,3 +255,61 @@ def edit_application(request, application_id):
     else:
         form = ApplicationForm(instance=application)
     return render(request, 'myapp/edit_application.html', {'form': form, 'application': application})
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Save the message to the database
+            contact_message = ContactMessage(
+                name=form.cleaned_data['name'],
+                email=form.cleaned_data['email'],
+                message=form.cleaned_data['message']
+            )
+            contact_message.save()
+
+            # Optionally, send an email to the admin
+
+            # Redirect to a success page or back to the contact form
+            return redirect('contact_success')
+    else:
+        form = ContactForm()
+    return render(request, 'myapp/contact.html', {'form': form})
+
+def contact_success(request):
+    return render(request, 'myapp/contact_success.html')  # Create this template
+
+def contact_messages(request):
+    """Displays a list of contact form messages."""
+    # Application Counts (same as in admin_home)
+    application_count = Application.objects.count()
+    accepted_count = Application.objects.filter(status='accepted').count()
+    rejected_count = Application.objects.filter(status='rejected').count()
+    pending_count = Application.objects.filter(status='pending').count()
+
+    messages = ContactMessage.objects.order_by('-timestamp')  # Order by newest first
+
+    # Fetch total message count
+    message_count = ContactMessage.objects.count()
+
+    context = {
+        'messages': messages,
+        'application_count': application_count,
+        'accepted_count': accepted_count,
+        'rejected_count': rejected_count,
+        'pending_count': pending_count,
+        'message_count': message_count,  # Add message count to the context
+    }
+    return render(request, 'contact_messages.html', context)
+def resolve_message(request, message_id):
+    """Marks a contact message as resolved."""
+    message = get_object_or_404(ContactMessage, pk=message_id)
+    message.status = 'resolved' #Set the status resolve or delete in table
+    message.save()
+    return redirect('contact_messages')  # Redirect back to the messages list
+
+def delete_message(request, message_id):
+    """Deletes a contact message."""
+    message = get_object_or_404(ContactMessage, pk=message_id)
+    message.delete()
+    return redirect('contact_messages')  # Redirect back to the messages list

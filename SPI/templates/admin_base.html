@@ -131,6 +131,7 @@
             <p>Accepted: {{ accepted_count }}</p>
             <p>Rejected: {{ rejected_count }}</p>
             <p>Pending: {{ pending_count }}</p>
+            <p>Messages: {{ message_count }}</p>
         </div>
 
         <div class="sidebar-section">
@@ -138,7 +139,8 @@
             <a href="{% url 'admin_home' %}">Home</a>
             <a href="{% url 'admin_dashboard' %}">All Applications</a>
             <a href="#">Accept Applications</a>  <!--  replace with actual URL -->
-            <a href="#">Reject Applications</a> <!-- Replace with actual URL -->
+            <a href="#">Reject Applications</a>
+            <a href="{% url 'contact_messages' %}">Messages</a> <!-- Replace with actual URL -->
         </div>
 
         <a href="{% url 'quick_links' %}" class="logout-button">Logout</a>

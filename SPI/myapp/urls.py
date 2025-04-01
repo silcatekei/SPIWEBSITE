@@ -37,4 +37,9 @@ urlpatterns = [
     path('spiangeles/', views.spiangeles, name='spiangeles'),
     path('application/edit/<int:application_id>/', views.edit_application, name='edit_application'),
     path('admin/upload-gallery/', upload_gallery_image, name='upload_gallery_image'),
+    path('contact/', views.contact, name='contact'),
+    path('contact/success/', views.contact_success, name='contact_success'),
+    path('admin_login', views.contact_messages, name='contact_messages'),
+    path('resolve/<int:message_id>/', views.resolve_message, name='resolve_message'),
+    path('delete/<int:message_id>/', views.delete_message, name='delete_message'),
 ]

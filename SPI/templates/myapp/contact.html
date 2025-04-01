@@ -1,10 +1,9 @@
 {% include 'myapp/header.html' %}
 {% include 'myapp/nav.html' %}
 
-
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">  <!-- Reference the updated CSS file -->
 
 <main class="contact-page">
     <h1>Contact Us</h1>
@@ -15,9 +14,7 @@
         <p><strong>Address:</strong> #655 San Martin St. San Angelo Subd. Sto. Domingo, Angeles City. (In front of Carmelite Church)</p>
         <p><strong>Phone:</strong> 0918 944 7532</p>
         <p><strong>Email:</strong> <a href="mailto:spiac_reg@yahoo.com">spiac_reg@yahoo.com</a></p>
-
         <p>🔗 <a href="https://www.facebook.com/SPIAngelesCity" target="_blank">Visit our Facebook Page</a></p>
-
     </section>
 
     <section class="branch">
@@ -25,7 +22,6 @@
         <p><strong>Address:</strong> L-Z Building, Central Terminal Area, D.S. Garcia, Cabanatuan City, Philippines</p>
         <p><strong>Phone:</strong> 0918 944 7530</p>
         <p><strong>Email:</strong> <a href="mailto:Skillpowerinstitutecabanatuan@gmail.com">Skillpowerinstitutecabanatuan@gmail.com</a></p>
-    
         <p>🔗 <a href="https://www.facebook.com/SPICabanatuanCity" target="_blank">Visit our Facebook Page</a></p>
     </section>
 
@@ -33,7 +29,7 @@
         <h2>📍 Antipolo Branch</h2>
         <p><strong>Address:</strong> 47 Manuel L. Quezon Ext, Dalig, Antipolo, 1870 Rizal</p>
         <p><strong>Phone:</strong> Mobile - 0905 317 2869 | Tel - (02) 8570-2298</p>
-        <p><strong>Email:</strong> <a href="mailto:mktg.skillpowerinstitute@gmail.com">mktg.skillpowerinstitute@gmail.com</a></p>    
+        <p><strong>Email:</strong> <a href="mailto:mktg.skillpowerinstitute@gmail.com">mktg.skillpowerinstitute@gmail.com</a></p>
         <p>🔗 <a href="https://www.facebook.com/SPIAntipoloCity" target="_blank">Visit our Facebook Page</a></p>
     </section>
 
@@ -41,7 +37,7 @@
         <h2>📍 Quezon City Branch</h2>
         <p><strong>Address:</strong> North Ave. Cor, Agham Rd. (in front of Veterans Hospital) Diliman, Quezon City, Philippines</p>
         <p><strong>Phone:</strong> 426-7940, 0918-6741165, 0927-7440622, 0921-3241736</p>
-        <p><strong>Email:</strong> <a href="mailto:spiqc_marketing@spi.edu.ph">spiqc_marketing@spi.edu.ph</a></p>    
+        <p><strong>Email:</strong> <a href="mailto:spiqc_marketing@spi.edu.ph">spiqc_marketing@spi.edu.ph</a></p>
         <p>🔗 <a href="https://www.facebook.com/SPIQuezonCity" target="_blank">Visit our Facebook Page</a></p>
     </section>
 
@@ -50,15 +46,7 @@
         <h2>Send Us a Message</h2>
         <form action="{% url 'contact' %}" method="POST">
             {% csrf_token %}
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
+            {{ form.as_p }}
             <button type="submit">Send Message</button>
         </form>
     </section>
@@ -67,8 +55,9 @@
     <section class="map-container">
         <h2>📍 Our Main Branch Location</h2>
         <iframe src="https://www.google.com/maps/embed?pb=!4v1743056203604!6m8!1m7!1sNt_uevF8tdv0IErJ6xaO6w!2m2!1d14.57525655011916!2d121.1767021572761!3f245.58475368945489!4f-2.8032465410687593!5f0.7820865974627469"
-        class="map-frame" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-</iframe>
+                class="map-frame" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
     </section>
 
     <!-- Operating Hours -->
@@ -88,141 +77,5 @@
     </section>
 
 </main>
-<style>/* Contact Us Page Styling */
-    .contact-page {
-        text-align: center;
-        font-family: Arial, sans-serif;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f4f4f4;
-        width: 80%;
-        max-width: 800px;
-    }
-    
-    /* Page Title */
-    .contact-page h1 {
-        color: #1B5E20; /* Dark Green */
-    }
-    
-    /* Branch Sections */
-    .contact-page .branch {
-        background-color: white;
-        margin: 20px auto;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        text-align: left;
-        border-left: 5px solid #FFD700; /* Golden Yellow Accent */
-    }
-    
-    /* Branch Headings */
-    .contact-page .branch h2 {
-        color: #1B5E20; /* Dark Green */
-    }
-    
-    /* Facebook Links */
-    .contact-page .branch a {
-        color: #FFD700; /* Golden Yellow */
-        text-decoration: none;
-        font-weight: bold;
-    }
-    
-    .contact-page .branch a:hover {
-        text-decoration: underline;
-    }
-    
-    /* Contact Form */
-    .contact-form {
-        background: white;
-        padding: 20px;
-        margin: 20px auto;
-        width: 80%;
-        max-width: 600px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        text-align: left;
-        border-top: 5px solid #1B5E20; /* Green Accent */
-    }
-    
-    .contact-form label {
-        display: block;
-        font-weight: bold;
-        margin-top: 10px;
-    }
-    
-    .contact-form input, 
-    .contact-form textarea {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    
-    .contact-form button {
-        display: block;
-        width: 100%;
-        background-color: #1B5E20; /* Green Button */
-        color: white;
-        border: none;
-        padding: 10px;
-        margin-top: 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-    
-    .contact-form button:hover {
-        background-color: #145A32; /* Darker Green */
-    }
-    
-    /* Google Map Styling */
-    .map-container {
-        margin: 20px auto;
-        width: 100%;
-        max-width: 800px;
-    }
-    
-    .map-container iframe {
-        width: 100%;
-        height: 300px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Operating Hours */
-    .operating-hours {
-        margin: 20px auto;
-        background: white;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        font-size: 18px;
-        border-bottom: 5px solid #FFD700; /* Golden Yellow Accent */
-    }
-    
-    /* Click-to-Call and Email */
-    .contact-buttons {
-        margin: 20px auto;
-        text-align: center;
-    }
-    
-    .contact-buttons a {
-        display: inline-block;
-        background-color: #FFD700; /* Golden Yellow Button */
-        color: #1B5E20; /* Green Text */
-        padding: 10px 20px;
-        border-radius: 5px;
-        text-decoration: none;
-        font-size: 16px;
-        margin: 5px;
-        font-weight: bold;
-    }
-    
-    .contact-buttons a:hover {
-        background-color: #FFC107; /* Slightly Darker Golden Yellow */
-    }
-    </style>
 
 {% include 'myapp/footer.html' %}

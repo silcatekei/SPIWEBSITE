@@ -1,12 +1,16 @@
-/* Contact Us Page Styling */
+/* Contact Us Page Styling - Mica Inspired */
 .contact-page {
     text-align: center;
     font-family: Arial, sans-serif;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: rgba(244, 244, 244, 0.7); /* Semi-transparent background */
     width: 80%;
     max-width: 800px;
+    border-radius: 12px;  /* More rounded corners */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /*  Softer shadow */
+    backdrop-filter: blur(10px); /*  Apply blur to the background */
+    -webkit-backdrop-filter: blur(10px); /*  For Safari */
 }
 
 /* Page Title */
@@ -16,13 +20,15 @@
 
 /* Branch Sections */
 .contact-page .branch {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
     margin: 20px auto;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08); /* Softer shadow */
     text-align: left;
     border-left: 5px solid #FFD700; /* Golden Yellow Accent */
+    backdrop-filter: blur(8px);  /* Apply blur */
+    -webkit-backdrop-filter: blur(8px); /* For Safari */
 }
 
 /* Branch Headings */
@@ -43,15 +49,17 @@
 
 /* Contact Form */
 .contact-form {
-    background: white;
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
     padding: 20px;
     margin: 20px auto;
     width: 80%;
     max-width: 600px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08); /* Softer shadow */
     text-align: left;
     border-top: 5px solid #1B5E20; /* Green Accent */
+    backdrop-filter: blur(8px); /* Apply blur */
+    -webkit-backdrop-filter: blur(8px); /* For Safari */
 }
 
 .contact-form label {
@@ -60,13 +68,14 @@
     margin-top: 10px;
 }
 
-.contact-form input, 
+.contact-form input,
 .contact-form textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid rgba(204, 204, 204, 0.8); /*  Softer border color */
+    border-radius: 8px; /* Slightly rounded inputs */
+    background-color: rgba(255, 255, 255, 0.5); /*  Subtle background */
 }
 
 .contact-form button {
@@ -77,9 +86,11 @@
     border: none;
     padding: 10px;
     margin-top: 15px;
-    border-radius: 5px;
+    border-radius: 8px; /* Rounded button */
     cursor: pointer;
     font-size: 16px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2); /* Subtle button shadow */
+    transition: background-color 0.2s ease; /* Smooth transition */
 }
 
 .contact-form button:hover {
@@ -96,20 +107,22 @@
 .map-container iframe {
     width: 100%;
     height: 300px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
 }
 
 /* Operating Hours */
 .operating-hours {
     margin: 20px auto;
-    background: white;
+    background: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08); /* Softer shadow */
     text-align: center;
     font-size: 18px;
     border-bottom: 5px solid #FFD700; /* Golden Yellow Accent */
+    backdrop-filter: blur(8px); /* Apply blur */
+    -webkit-backdrop-filter: blur(8px); /* For Safari */
 }
 
 /* Click-to-Call and Email */
@@ -123,11 +136,13 @@
     background-color: #FFD700; /* Golden Yellow Button */
     color: #1B5E20; /* Green Text */
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 8px; /* Rounded buttons */
     text-decoration: none;
     font-size: 16px;
     margin: 5px;
     font-weight: bold;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: background-color 0.2s ease; /* Smooth transition */
 }
 
 .contact-buttons a:hover {

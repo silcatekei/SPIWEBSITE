@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.process-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 50px 20px;
+}
+
+.step {
+    background: rgba(0, 77, 0, 0.7); /* Semi-transparent green */
+    color: white;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    backdrop-filter: blur(10px); /* Add blur */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+}
+
+.step h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.arrow {
+    font-size: 100px;
+    color: gold;
+    font-weight: bold;
+    margin: -15px 0;
+}
+
+.apply-button {
+    display: inline-block;
+    background: gold;
+    color: #004d00;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    font-size: 14px;
+}
+
+.apply-button:hover {
+    background: yellow;
+    color: black;
+    transform: scale(1.05);
+}

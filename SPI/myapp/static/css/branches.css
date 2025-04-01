@@ -1,106 +1,69 @@
-/* Import modern fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-/* Scope to branch content only */
-.branch-content {
+/* General Styles */
+body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    color: #f8f9fa;
-    text-align: center;
-    padding: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 1.6;
 }
 
-/* Headings */
-.branch-content h1 {
-    font-size: 3.5em;
-    font-weight: 700;
-    color: #ffcc00;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-    margin-top: 30px;
-}
-
-.branch-content h2 {
-    font-size: 2.2em;
-    color: #f8f9fa;
-    background-color: rgba(38, 70, 38, 0.8);
-    padding: 10px;
-    border-radius: 8px;
-    display: inline-block;
+/* Branch Content Container */
+.branch-content {
+    max-width: 960px;
     margin: 20px auto;
-    border-bottom: 3px solid #ffcc00;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.6); /* Semi-transparent background */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); /* Add blur */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    text-align: center; /* Center-align content */
 }
 
-/* Paragraphs */
+/* Branch Title */
+.branch-content h1 {
+    color: #285430; /* Dark green color */
+    margin-bottom: 20px;
+}
+
+/* Contact Details Heading */
+.branch-content h2 {
+    color: #333; /* Dark color for headings */
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Contact Details Text */
 .branch-content p {
-    font-size: 1.2em;
-    text-align: justify;
-    max-width: 850px;
-    margin: 15px auto;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    color: #fff9c4;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    color: #555; /* Darker color for text */
+    margin-bottom: 10px;
 }
 
-/* Links */
-.branch-content a {
-    color: #ffcc00;
-    font-weight: bold;
-    text-decoration: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.branch-content a:hover {
-    color: #fff9c4;
-    text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.8);
-}
-
-/* Image Styling */
-.branch-content .branch-image {
-    display: block;
-    max-width: 55%;
-    height: auto;
-    margin: 30px auto;
-    border-radius: 15px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-    border: 4px solid #ffcc00;
-    transition: transform 0.3s ease-in-out;
-}
-
-.branch-content .branch-image:hover {
-    transform: scale(1.05);
-}
-
-/* Google Maps Iframe */
-.branch-content .map-frame {
-    display: block;
+/* Branch Image */
+.branch-image {
     width: 80%;
-    height: 450px;
-    margin: 30px auto;
-    border-radius: 15px;
-    border: 3px solid #ffcc00;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .branch-content h1 {
-        font-size: 2.8em;
-    }
+/* Google Maps Embed */
+.map-frame {
+    width: 100%;
+    height: 400px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-    .branch-content h2 {
-        font-size: 1.8em;
-    }
+/* Email Link */
+.branch-content a[href^="mailto:"] {
+    color: #007bff; /* Bootstrap primary color */
+    text-decoration: none;
+}
 
-    .branch-content p {
-        font-size: 1.1em;
-        padding: 12px;
-    }
-
-    .branch-content .branch-image,
-    .branch-content .map-frame {
-        width: 90%;
-    }
+.branch-content a[href^="mailto:"]:hover {
+    text-decoration: underline;
 }

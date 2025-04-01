@@ -34,3 +34,18 @@ class Application(models.Model):
         verbose_name = "Application"  # Custom name
         verbose_name_plural = "Applications"  # Custom plural name
         ordering = ['application_date']  # Default ordering of entries
+
+class ContactMessage(models.Model):
+    STATUS_CHOICES = (
+        ('pending', 'Pending'),
+        ('resolved', 'Resolved'),
+    )
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    def __str__(self):
+        return f"Message from {self.name} ({self.email})"

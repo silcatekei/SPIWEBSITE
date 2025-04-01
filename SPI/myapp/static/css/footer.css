@@ -1,99 +1,60 @@
-/* Ensure the page stretches to full height */
-html {
-    height: 100%;
-}
-
-body {
-    min-height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Poppins', sans-serif; /* Modern font */
-}
-
-/* Push main content to ensure footer stays at the bottom */
-main {
-    flex: 1;
-}
-
-/* Footer styles */
+/* Footer Styles - Mica Inspired */
 footer {
-    background-color: #1b5e20;
-    color: #ffcc00;
-    padding: 50px 80px;
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+    color: white;
+    padding: 20px;
     display: flex;
-    justify-content: center; /* Center columns */
-    align-items: flex-start;
+    justify-content: space-around;
+    align-items: flex-start;  /* Align items to the top */
     flex-wrap: wrap;
-    border-top: 5px solid #ffcc00;
-    font-size: 16px;
+    backdrop-filter: blur(10px); /* Apply blur */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    border-radius: 10px;
+    margin-top: 20px; /* Add some space above the footer */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px; /* Increased font size */
+    line-height: 1.6; /* Improved line height for readability */
+}
+
+/* Footer Section Styling */
+.footer-section {
+    width: 30%;
     text-align: left;
-    gap: 50px; /* Add equal spacing between columns */
-}
-
-
-/* Footer section layout */
-footer div {
-    flex: 1;
-    max-width: 30%;
-    padding: 10px;
-}
-
-
-/* Footer titles */
-footer div p:first-child {
-    font-size: 20px;
-    color: #ffcc00;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-
-/* Footer links */
-footer a {
-    color: #cba40b;
-    text-decoration: none;
-    display: block;
-    margin: 8px 0;
-    transition: 0.3s ease-in-out;
-}
-
-/* Hover effect for footer links */
-footer a:hover {
-    color: #ffd700; /* Brighter gold */
-    text-shadow: 1px 1px 5px rgba(255, 204, 0, 0.6);
-    transform: scale(1.05);
-}
-
-/* Contact details */
-footer div p {
-    margin: 6px 0;
-    line-height: 1.5;
-}
-
-/* Social media icons */
-footer .social-icons {
-    display: flex;
-    gap: 15px;
-}
-
-footer .social-icons a {
-    font-size: 24px;
+    margin-bottom: 20px;  /* Add spacing between sections on smaller screens */
 }
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     footer {
-        padding: 30px;
-        flex-direction: column;
+        flex-direction: column; /* Stack sections vertically */
+        align-items: center; /* Center the sections */
         text-align: center;
     }
 
-    footer div {
-        max-width: 100%;
-        margin: 15px 0;
+    .footer-section {
+        width: 80%; /* Make sections wider on smaller screens */
     }
+}
 
-    footer .social-icons {
-        justify-content: center;
-    }
+/* Styling for individual links */
+footer a {
+    color: #FFD700; /* Golden yellow color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block; /* Makes the whole line clickable */
+    margin-bottom: 5px; /* Spacing between links */
+    font-size: 20px; /* Ensure links also have the larger font size */
+}
+
+footer a:hover {
+    color: #FFECB3; /* Lighter golden yellow on hover */
+}
+
+/* Styling for strong tags (e.g., "Address:", "Contact:") */
+footer strong {
+    color: #FFFFFF; /* White color for strong text */
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 20px; /* Ensure strong text has the larger font size */
 }

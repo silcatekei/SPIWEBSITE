@@ -9,108 +9,18 @@
     <title>Skill Power Institute</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Bitter:wght@700&display=swap" rel="stylesheet">
-    <style>
-        /* Global Styles */
-        body {
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    background: url('https://i.ibb.co/V05HRwS4/Beige-Blue-Aesthetic-Mood-Board-Minimalist-Photo-Collage-Banner.jpg') 
-                no-repeat center center fixed;
-    background-size: contain; /* Ensures the whole image fits without cropping */
-    color: white;
-    height: 100vh; /* Makes sure it covers the full viewport height */
-}
-        /* Header & Navigation */
-        header {
-            background: rgba(7, 119, 69, 0.9);
-            padding: 20px 0;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 20vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            flex-direction: column;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        .hero h1 {
-            font-size: 50px;
-            font-family: 'Bitter', serif;
-            margin-bottom: 10px;
-        }
-        .hero p {
-            font-size: 20px;
-            color: #fccd33;
-        }
-        
-        /* Card Section */
-        .deck {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            padding: 50px 20px;
-        }
-        
-        .card-space {
-            perspective: 1200px;
-        }
-        
-        .card {
-            width: 400px;
-            height: 450px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s ease-in-out;
-            border-radius: 15px;
-            cursor: pointer;
-        }
-        
-        .card-space:hover .card {
-            transform: rotateY(180deg);
-        }
-        
-        .face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            backface-visibility: hidden;
-        }
-        
-        .front {
-            background: linear-gradient(135deg, #077745, #055c34);
-            color: #fccd33;
-        }
-        .back {
-            background: linear-gradient(135deg, #fccd33, #d9a825);
-            color: #077745;
-            transform: rotateY(180deg);
-        }
 
-    </style>
+     <!-- Add your custom CSS file for Mica style -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/mv.css' %}">
 </head>
 <body>
-    <header>Skill Power Institute</header>
-    
+
     <section class="hero">
         <h1>Empowering Education, Transforming Lives</h1>
         <p>Providing world-class education with a commitment to excellence.</p>
     </section>
-    
+
     <section class="deck">
         <div class="card-space">
             <div class="card">
@@ -122,7 +32,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="card-space">
             <div class="card">
                 <div class="face front">
@@ -134,9 +44,8 @@
             </div>
         </div>
     </section>
-    
+
 </body>
 </html>
-
 
 {% include 'myapp/footer.html' %}
