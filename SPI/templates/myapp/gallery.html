@@ -1,11 +1,59 @@
+{% load static %}
 {% include 'myapp/header.html' %}
 {% include 'myapp/nav.html' %}
 
-<div style="height: 150x;"></div>
+<!-- Link to External CSS -->
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
 
-<b> Under development</b>
+<div class="container mt-4">
+    <h2 class="text-center">Gallery</h2>
+    <div class="row">
+        {% for folder, images in galleries.items %}
+        <div class="col-12 mt-4">
+            <h4>{{ folder }}</h4>
+            <div class="row">
+                {% for image in images %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="{% static image %}" class="card-img-top gallery-image" alt="Gallery Image" onclick="openPreview(this)">
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No images available.</p>
+        {% endfor %}
+    </div>
+</div>
 
-<div style="height: 150px;"></div>
-
+<!-- Image Preview Modal -->
+<div id="imagePreviewModal" class="modal">
+    <span class="close" onclick="closePreview()">&times;</span>
+    <img class="modal-content" id="previewImage">
+</div>
 
 {% include 'myapp/footer.html' %}
+
+<!-- JavaScript for Modal -->
+<script>
+function openPreview(img) {
+    var modal = document.getElementById("imagePreviewModal");
+    var previewImage = document.getElementById("previewImage");
+
+    modal.style.display = "flex";
+    previewImage.src = img.src;
+}
+
+// Close modal when clicking outside image or on "X"
+function closePreview() {
+    document.getElementById("imagePreviewModal").style.display = "none";
+}
+
+// Close modal when clicking outside the image
+document.getElementById("imagePreviewModal").addEventListener("click", function(event) {
+    if (event.target === this) {
+        closePreview();
+    }
+});
+</script>

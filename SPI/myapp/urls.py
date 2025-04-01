@@ -2,6 +2,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views  # Import the whole module
+from .views import upload_gallery_image
 
 
 urlpatterns = [
@@ -35,4 +36,5 @@ urlpatterns = [
     path('spicabanatuan/', views.spicabanatuan, name='spicabanatuan'),
     path('spiangeles/', views.spiangeles, name='spiangeles'),
     path('application/edit/<int:application_id>/', views.edit_application, name='edit_application'),
+    path('admin/upload-gallery/', upload_gallery_image, name='upload_gallery_image'),
 ]

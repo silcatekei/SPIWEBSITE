@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ApplicationForm
 from django.contrib.auth import authenticate, login, logout
@@ -6,6 +8,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages  # Always good to use messages for feedback
 from .models import Application  # Import your Application model
 from django.utils import timezone
+from django.shortcuts import render, redirect
+from django.core.files.storage import FileSystemStorage
 
 # --- Basic Page Views ---
 def home(request):
@@ -62,7 +66,37 @@ def spicabanatuan(request):
 def spiangeles(request):
     return render(request, 'myapp/angeles.html')
 
+def upload_gallery_image(request):
+    if request.method == 'POST' and request.FILES.get('gallery_image'):
+        image = request.FILES['gallery_image']
+        fs = FileSystemStorage(location='static/images/galleries/')  # Ensure this directory exists
+        filename = fs.save(image.name, image)
+        return redirect('admin_home')  # Redirect back to admin panel after upload
 
+    return render(request, 'admin_base.html')
+
+def gallery(request):
+    galleries = {}
+    
+    # ✅ Update this to include 'myapp' in the path
+    gallery_path = os.path.join(settings.BASE_DIR, 'myapp', 'static', 'images', 'galleries')
+
+    if os.path.exists(gallery_path):  # Check if directory exists
+        for folder in os.listdir(gallery_path):
+            folder_path = os.path.join(gallery_path, folder)
+            if os.path.isdir(folder_path):  # Ensure it's a folder
+                images = [
+                    f'images/galleries/{folder}/{img}' 
+                    for img in os.listdir(folder_path) 
+                    if img.endswith(('png', 'jpg', 'jpeg', 'gif'))
+                ]
+                
+                print(f"✅ Found Folder: {folder}, Images: {images}")  # Debugging
+
+                if images:
+                    galleries[folder] = images  # Store images by folder
+
+    return render(request, 'myapp/gallery.html', {'galleries': galleries})
 
 
 # --- Apply Online View ---
