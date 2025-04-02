@@ -1,0 +1,48 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+    <h2 class="text-center mb-4">Upload Image</h2>
+    
+    <div class="container">
+        <form action="{% url 'upload_image' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Gallery Selection -->
+            <div class="mb-3">
+                <label for="gallery" class="form-label">Select Gallery (Optional):</label>
+                <select name="gallery" class="form-select">
+                    <option value="">-- Choose a Gallery or Leave Blank to Create a New One --</option>
+                    {% for gallery in galleries %}
+                        <option value="{{ gallery }}">{{ gallery }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- New Gallery Name (Optional) -->
+            <div class="mb-3">
+                <label for="new_gallery_name" class="form-label">Name New Gallery (Optional):</label>
+                <input type="text" name="new_gallery_name" class="form-control" placeholder="Enter gallery name (Optional)">
+            </div>
+            
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Choose an Image:</label>
+                <input type="file" name="image" class="form-control" required>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100">Upload</button>
+        </form>
+    </div>
+
+    <!-- Display Success/Error Messages -->
+    {% if messages %}
+        <div class="container mt-4">
+            {% for message in messages %}
+                <div class="alert alert-info">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

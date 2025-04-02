@@ -16,10 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-bf1n4ncb=ko@84!e_0+xtj_evcruxntm3!-&te!9o*kscd-0#4'
 
@@ -28,9 +24,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,25 +64,9 @@ TEMPLATES = [
     },
 ]
 
-STATIC_URL = '/static/'
-
-# Add this line to point Django to your static folder
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'myapp/static'),
-]
-
-# For production, also collect static files into STATIC_ROOT
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-
-
-
 WSGI_APPLICATION = 'SPI.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# Database Configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -96,10 +74,7 @@ DATABASES = {
     }
 }
 
-
 # Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -115,36 +90,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'Asia/Manila'
 USE_I18N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
+STATIC_URL = '/static/'
 
-STATIC_URL = 'static/'
+# Define Static Files Directory Correctly (Fixed)
+STATICFILES_DIRS = [
+    BASE_DIR / 'myapp' / 'static',  # Correct path
+]
+
+# Collect static files for production (run collectstatic before deployment)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_URL = '/static/'  # URL for static files
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'myapp/static',  # Path to your static files directory
-]
+# Redirect after login
 LOGIN_REDIRECT_URL = 'home'
-
-# settings.py
-USE_TZ = True
-TIME_ZONE = 'Asia/Manila'

@@ -3,6 +3,8 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views  # Import the whole module
 from .views import upload_gallery_image
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -42,4 +44,7 @@ urlpatterns = [
     path('admin_login', views.contact_messages, name='contact_messages'),
     path('resolve/<int:message_id>/', views.resolve_message, name='resolve_message'),
     path('delete/<int:message_id>/', views.delete_message, name='delete_message'),
-]
+    path('upload-folder/', views.upload_folder, name='upload_folder'),
+    path('gallery/', views.gallery, name='view_gallery'),
+    path('upload-image/', views.upload_image, name='upload_image'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

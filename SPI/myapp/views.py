@@ -1,17 +1,18 @@
 import os
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ApplicationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib import messages  # Always good to use messages for feedback
-from .models import Application  # Import your Application model
+from django.contrib import messages
+from django.core.files.storage import default_storage, FileSystemStorage
+from django.core.exceptions import ValidationError
+from django.utils.text import slugify
+from .models import Application, ContactMessage
+from .forms import ApplicationForm, ContactForm
 from django.utils import timezone
-from django.shortcuts import render, redirect
-from django.core.files.storage import FileSystemStorage
-from .forms import ContactForm
-from .models import ContactMessage
+from django.utils.crypto import get_random_string
+
 
 # --- Basic Page Views ---
 def home(request):
@@ -68,19 +69,125 @@ def spicabanatuan(request):
 def spiangeles(request):
     return render(request, 'myapp/angeles.html')
 
+ #gallery options codes
+
+
+
+def upload_image(request):
+    galleries_path = os.path.join(settings.BASE_DIR, 'myapp', 'static', 'images', 'galleries')  # Correct path to static/images/galleries
+    
+    # Ensure that the folder exists
+    if not os.path.exists(galleries_path):
+        os.makedirs(galleries_path)
+
+    # Get the list of galleries in the 'galleries' folder
+    galleries = [f.name for f in os.scandir(galleries_path) if f.is_dir()]
+
+    if request.method == 'POST':
+        gallery_name = request.POST.get('gallery')  # Get the selected gallery from the form
+        new_gallery_name = request.POST.get('new_gallery_name')  # Get the new gallery name from the form
+        
+        if 'image' not in request.FILES:
+            messages.error(request, "No image selected.")
+            return redirect('upload_image')
+
+        uploaded_file = request.FILES['image']
+
+        # If no gallery is selected and a new name is provided, create a custom folder with the new name
+        if not gallery_name and new_gallery_name:
+            gallery_name = new_gallery_name  # Use the new gallery name provided by the user
+            custom_gallery_path = os.path.join(galleries_path, gallery_name)
+            
+            # Create the gallery folder if it doesn't exist
+            if not os.path.exists(custom_gallery_path):
+                os.makedirs(custom_gallery_path)
+            gallery_path = custom_gallery_path
+            messages.info(request, f"New gallery '{gallery_name}' created.")
+        elif not gallery_name:
+            # If no gallery name is provided, create a random gallery name
+            gallery_name = get_random_string(8)  # Create a unique folder name
+            custom_gallery_path = os.path.join(galleries_path, gallery_name)
+            
+            # Create the gallery folder if it doesn't exist
+            if not os.path.exists(custom_gallery_path):
+                os.makedirs(custom_gallery_path)
+            gallery_path = custom_gallery_path
+            messages.info(request, f"New gallery '{gallery_name}' created.")
+        else:
+            gallery_path = os.path.join(galleries_path, gallery_name)
+
+            # Check if the directory exists, and if not, create it
+            if not os.path.exists(gallery_path):
+                os.makedirs(gallery_path)
+
+        # Create a unique filename to prevent collisions
+        unique_filename = get_random_string(8) + os.path.splitext(uploaded_file.name)[1]
+        
+        # Save the uploaded file to the correct location
+        file_storage = FileSystemStorage(location=gallery_path)
+        filename = file_storage.save(unique_filename, uploaded_file)
+
+        # Show a success message
+        messages.success(request, f"Image uploaded successfully to '{gallery_name}' gallery.")
+
+        return redirect('upload_image')  # Redirect after successful upload
+
+    return render(request, 'upload_image.html', {'galleries': galleries})
+
+def get_gallery_folders():
+    gallery_folder_path = os.path.join(settings.MEDIA_ROOT,  'galleries')
+    if not os.path.exists(gallery_folder_path):
+        os.makedirs(gallery_folder_path)
+    
+    return [f for f in os.listdir(gallery_folder_path) if os.path.isdir(os.path.join(gallery_folder_path, f))]
+
+def upload_folder(request):
+    if request.method == 'POST' and 'images' in request.FILES:
+        uploaded_images = request.FILES.getlist('images')  # Get all uploaded images
+        gallery_name = request.POST.get('gallery_name')  # Get the selected gallery name
+        gallery_path = os.path.join(settings.BASE_DIR, 'myapp', 'static', 'images', 'galleries', gallery_name)
+        
+        if not os.path.exists(gallery_path):
+            os.makedirs(gallery_path)
+
+        fs = FileSystemStorage(location=gallery_path)
+
+        for image in uploaded_images:
+            unique_filename = get_random_string(8) + os.path.splitext(image.name)[1]
+            fs.save(unique_filename, image)  # Save each image with a unique name
+
+        messages.success(request, f"Images uploaded successfully to '{gallery_name}' gallery.")
+        return redirect('upload_image')  # Redirect back after successful upload
+    
+    return render(request, 'upload_folder.html')
+
+
+
 def upload_gallery_image(request):
     if request.method == 'POST' and request.FILES.get('gallery_image'):
         image = request.FILES['gallery_image']
-        fs = FileSystemStorage(location='static/images/galleries/')  # Ensure this directory exists
-        filename = fs.save(image.name, image)
-        return redirect('admin_home')  # Redirect back to admin panel after upload
+        gallery_name = request.POST.get('gallery_name')  # Get the gallery name from the form
+        gallery_path = os.path.join(settings.BASE_DIR, 'myapp', 'static', 'images', 'galleries', gallery_name)
+        
+        if not os.path.exists(gallery_path):
+            os.makedirs(gallery_path)
+        
+        fs = FileSystemStorage(location=gallery_path)
+        unique_filename = get_random_string(8) + os.path.splitext(image.name)[1]
+        fs.save(unique_filename, image)
+
+        messages.success(request, f"Image uploaded successfully to '{gallery_name}' gallery.")
+        return redirect('admin_home')  # Redirect back after successful upload
 
     return render(request, 'admin_base.html')
+
+import os
+from django.conf import settings
 
 def gallery(request):
     galleries = {}
     
-    # ✅ Update this to include 'myapp' in the path
+    # Path to the 'galleries' folder where images are stored
     gallery_path = os.path.join(settings.BASE_DIR, 'myapp', 'static', 'images', 'galleries')
 
     if os.path.exists(gallery_path):  # Check if directory exists
@@ -93,12 +200,11 @@ def gallery(request):
                     if img.endswith(('png', 'jpg', 'jpeg', 'gif'))
                 ]
                 
-                print(f"✅ Found Folder: {folder}, Images: {images}")  # Debugging
-
                 if images:
                     galleries[folder] = images  # Store images by folder
 
     return render(request, 'myapp/gallery.html', {'galleries': galleries})
+
 
 
 # --- Apply Online View ---
