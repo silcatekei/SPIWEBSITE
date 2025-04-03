@@ -64,6 +64,9 @@ TEMPLATES = [
     },
 ]
 
+LOGOUT_REDIRECT_URL = 'login'  # Redirects after logout
+
+
 WSGI_APPLICATION = 'SPI.wsgi.application'
 
 # Database Configuration

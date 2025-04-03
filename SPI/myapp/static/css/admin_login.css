@@ -6,7 +6,9 @@
     padding: 15px;
     margin: auto;
   }
-  
+
+
+
   .form-signin .checkbox {
     font-weight: 400;
   }
@@ -26,3 +28,13 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+
+  .home-btn {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;}

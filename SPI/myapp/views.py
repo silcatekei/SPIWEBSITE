@@ -14,6 +14,7 @@ from django.utils import timezone
 from django.utils.crypto import get_random_string
 
 
+
 # --- Basic Page Views ---
 def home(request):
     return render(request, 'myapp/home.html')
@@ -73,66 +74,6 @@ def spiangeles(request):
 
 
 
-def upload_image(request):
-    galleries_path = os.path.join(settings.BASE_DIR, 'myapp', 'static', 'images', 'galleries')  # Correct path to static/images/galleries
-    
-    # Ensure that the folder exists
-    if not os.path.exists(galleries_path):
-        os.makedirs(galleries_path)
-
-    # Get the list of galleries in the 'galleries' folder
-    galleries = [f.name for f in os.scandir(galleries_path) if f.is_dir()]
-
-    if request.method == 'POST':
-        gallery_name = request.POST.get('gallery')  # Get the selected gallery from the form
-        new_gallery_name = request.POST.get('new_gallery_name')  # Get the new gallery name from the form
-        
-        if 'image' not in request.FILES:
-            messages.error(request, "No image selected.")
-            return redirect('upload_image')
-
-        uploaded_file = request.FILES['image']
-
-        # If no gallery is selected and a new name is provided, create a custom folder with the new name
-        if not gallery_name and new_gallery_name:
-            gallery_name = new_gallery_name  # Use the new gallery name provided by the user
-            custom_gallery_path = os.path.join(galleries_path, gallery_name)
-            
-            # Create the gallery folder if it doesn't exist
-            if not os.path.exists(custom_gallery_path):
-                os.makedirs(custom_gallery_path)
-            gallery_path = custom_gallery_path
-            messages.info(request, f"New gallery '{gallery_name}' created.")
-        elif not gallery_name:
-            # If no gallery name is provided, create a random gallery name
-            gallery_name = get_random_string(8)  # Create a unique folder name
-            custom_gallery_path = os.path.join(galleries_path, gallery_name)
-            
-            # Create the gallery folder if it doesn't exist
-            if not os.path.exists(custom_gallery_path):
-                os.makedirs(custom_gallery_path)
-            gallery_path = custom_gallery_path
-            messages.info(request, f"New gallery '{gallery_name}' created.")
-        else:
-            gallery_path = os.path.join(galleries_path, gallery_name)
-
-            # Check if the directory exists, and if not, create it
-            if not os.path.exists(gallery_path):
-                os.makedirs(gallery_path)
-
-        # Create a unique filename to prevent collisions
-        unique_filename = get_random_string(8) + os.path.splitext(uploaded_file.name)[1]
-        
-        # Save the uploaded file to the correct location
-        file_storage = FileSystemStorage(location=gallery_path)
-        filename = file_storage.save(unique_filename, uploaded_file)
-
-        # Show a success message
-        messages.success(request, f"Image uploaded successfully to '{gallery_name}' gallery.")
-
-        return redirect('upload_image')  # Redirect after successful upload
-
-    return render(request, 'upload_image.html', {'galleries': galleries})
 
 def get_gallery_folders():
     gallery_folder_path = os.path.join(settings.MEDIA_ROOT,  'galleries')
@@ -205,7 +146,17 @@ def gallery(request):
 
     return render(request, 'myapp/gallery.html', {'galleries': galleries})
 
+def custom_logout(request):
+    user = request.user
+    logout(request)  # Log out the user
 
+    # Check if the user is an admin or a student
+    if user.is_staff and user.is_superuser:  # Admin user
+        messages.success(request, "Admin logged out successfully.")
+        return redirect('admin_login')  # Redirect to the admin login page
+    else:  # Regular student user
+        messages.success(request, "Logged out successfully.")
+        return redirect('login')  # Redirect to the student login page
 
 # --- Apply Online View ---
 def apply_online(request):
@@ -254,6 +205,11 @@ def login_view(request):
 def student_dashboard(request):
     context = {'user': request.user}
     return render(request, 'student_dashboard.html', context)
+
+
+def custom_logout_view(request):
+    logout(request)  # Logs out the user
+    return redirect('login')  # Redirects to login page
 
 # --- Admin Views ---
 def is_admin(user):
@@ -304,6 +260,70 @@ def admin_login_view(request):
         form = AuthenticationForm() # if there is no data
 
     return render(request, 'admin_login.html', {'form': form}) # renders the form
+
+@login_required(login_url='/admin/login/')  # Redirects logged-out users to login
+@user_passes_test(is_admin, login_url='/admin/login/', redirect_field_name=None)
+def upload_image(request):
+    galleries_path = os.path.join(settings.BASE_DIR, 'myapp', 'static', 'images', 'galleries')  # Correct path to static/images/galleries
+    
+    # Ensure that the folder exists
+    if not os.path.exists(galleries_path):
+        os.makedirs(galleries_path)
+
+    # Get the list of galleries in the 'galleries' folder
+    galleries = [f.name for f in os.scandir(galleries_path) if f.is_dir()]
+
+    if request.method == 'POST':
+        gallery_name = request.POST.get('gallery')  # Get the selected gallery from the form
+        new_gallery_name = request.POST.get('new_gallery_name')  # Get the new gallery name from the form
+        
+        if 'image' not in request.FILES:
+            messages.error(request, "No image selected.")
+            return redirect('upload_image')
+
+        uploaded_file = request.FILES['image']
+
+        # If no gallery is selected and a new name is provided, create a custom folder with the new name
+        if not gallery_name and new_gallery_name:
+            gallery_name = new_gallery_name  # Use the new gallery name provided by the user
+            custom_gallery_path = os.path.join(galleries_path, gallery_name)
+            
+            # Create the gallery folder if it doesn't exist
+            if not os.path.exists(custom_gallery_path):
+                os.makedirs(custom_gallery_path)
+            gallery_path = custom_gallery_path
+            messages.info(request, f"New gallery '{gallery_name}' created.")
+        elif not gallery_name:
+            # If no gallery name is provided, create a random gallery name
+            gallery_name = get_random_string(8)  # Create a unique folder name
+            custom_gallery_path = os.path.join(galleries_path, gallery_name)
+            
+            # Create the gallery folder if it doesn't exist
+            if not os.path.exists(custom_gallery_path):
+                os.makedirs(custom_gallery_path)
+            gallery_path = custom_gallery_path
+            messages.info(request, f"New gallery '{gallery_name}' created.")
+        else:
+            gallery_path = os.path.join(galleries_path, gallery_name)
+
+            # Check if the directory exists, and if not, create it
+            if not os.path.exists(gallery_path):
+                os.makedirs(gallery_path)
+
+        # Create a unique filename to prevent collisions
+        unique_filename = get_random_string(8) + os.path.splitext(uploaded_file.name)[1]
+        
+        # Save the uploaded file to the correct location
+        file_storage = FileSystemStorage(location=gallery_path)
+        filename = file_storage.save(unique_filename, uploaded_file)
+
+        # Show a success message
+        messages.success(request, f"Image uploaded successfully to '{gallery_name}' gallery.")
+
+        return redirect('upload_image')  # Redirect after successful upload
+
+    return render(request, 'upload_image.html', {'galleries': galleries})
+
 
 @login_required
 @user_passes_test(is_admin)

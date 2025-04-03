@@ -120,8 +120,10 @@
             </div>
         </div>
 
-        <a href="{% url 'quick_links' %}" class="btn btn-danger logout-button">Logout</a>
-    </div>
+<form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger logout-button">Logout</button>
+</form>
 
     <main class="main-content">
         <div class="mica-card">

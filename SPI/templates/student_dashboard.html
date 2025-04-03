@@ -87,7 +87,10 @@
         <li><a href="#"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
       </ul>
     </div>
-    <a href="{% url 'quick_links' %}" class="btn btn-secondary"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger logout-button">Logout</button>
+</form>
   </div>
 
   <main class="main-content">

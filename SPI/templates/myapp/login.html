@@ -65,6 +65,19 @@
         border-color: #0062cc;
       }
 
+      .form-signin .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        border-radius: 5px;
+        padding: 0.75rem 1.5rem;
+        margin-top: 10px;
+      }
+
+      .form-signin .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+      }
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -85,6 +98,7 @@
 <main class="form-signin w-100 m-auto">
   <form method="post">
     {% csrf_token %}
+    
     <img class="mb-4" src="{% static 'images/SPI_LOGO-removebg-preview.png' %}" alt="" width="65" height="57">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
@@ -104,9 +118,13 @@
       </label>
     </div>
     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-      {% if form.errors %}
-            <p style="color: red;">Invalid username or password.</p>
-        {% endif %}
+
+    {% if form.errors %}
+      <p style="color: red;">Invalid username or password.</p>
+    {% endif %}
+
+    <!-- Home Button -->
+    <a href="{% url 'home' %}" class="btn btn-secondary w-100 py-2 mt-2">Home</a>
   </form>
 </main>
 

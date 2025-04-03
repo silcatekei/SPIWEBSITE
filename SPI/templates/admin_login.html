@@ -1,15 +1,35 @@
-{% extends "admin_login_base.html" %} {# Change the base #}
+{% extends "admin_login_base.html" %} 
 {% load static %}
 
 {% block title %}Admin Login{% endblock %}
 
-{% block extrastyle %} {# Add this extrastyle block #}
+{% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/admin_login.css' %}">
+    <style>
+      /* Home button positioned at the upper-right corner */
+      .home-btn {
+        position: absolute;
+        top: 40px;  /* Distance from the top */
+        right: 40px;  /* Distance from the right */
+        background-color: #3296ef;  /* Button color */
+        color: white;
+        padding: 8px 16px;  /* Padding inside the button */
+        border-radius: 5px;  /* Rounded corners */
+        text-decoration: none;  /* Remove underline from link */
+      }
+
+      .home-btn:hover {
+        background-color: #5a6268;  /* Darker shade when hovering */
+      }
+    </style>
 {% endblock %}
 
 {% block content %}
 <main class="form-signin">
+  <!-- Home Button positioned in the upper-right corner -->
+  <a href="{% url 'home' %}" class="home-btn">Home</a>
+  
   <form method="post">
     {% csrf_token %}
     <img class="mb-4" src="{% static 'images/SPI_LOGO-removebg-preview.png' %}" alt="" width="72" height="57">
@@ -30,7 +50,8 @@
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-    <p class="mt-5 mb-3 text-muted">© 2017–2024</p>
+
+    <p class="mt-5 mb-3 text-muted">© 2025–2026</p>
   </form>
 </main>
 {% endblock %}

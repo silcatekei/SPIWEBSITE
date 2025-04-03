@@ -5,6 +5,11 @@ from . import views  # Import the whole module
 from .views import upload_gallery_image
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import custom_logout_view
+from django.urls import path
+from .views import custom_logout  
+
+
 
 
 urlpatterns = [
@@ -25,10 +30,8 @@ urlpatterns = [
     path('apply/', views.apply_online, name='apply_online'),
     path('login/', views.login_view, name='login'),
     path('dashboard/', views.student_dashboard, name='student_dashboard'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='/login/'), name='logout'),
     path('home/', views.admin_home, name='admin_home'),
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'), #URL for the admin dashboard
-    path('admin_login/', views.admin_login_view, name='admin_login'), #admin login url
     path('confirmation/<int:application_id>/', views.application_confirmation, name='application_confirmation'),
     path('accept_application/<int:application_id>/', views.accept_application, name='accept_application'),
     path('reject_application/<int:application_id>/', views.reject_application, name='reject_application'),
@@ -47,4 +50,6 @@ urlpatterns = [
     path('upload-folder/', views.upload_folder, name='upload_folder'),
     path('gallery/', views.gallery, name='view_gallery'),
     path('upload-image/', views.upload_image, name='upload_image'),
+    path('logout/', custom_logout, name='logout'),
+    path('admin_login/', views.admin_login_view, name='admin_login'),  # Admin login URL
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
