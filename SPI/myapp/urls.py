@@ -52,4 +52,5 @@ urlpatterns = [
     path('upload-image/', views.upload_image, name='upload_image'),
     path('logout/', custom_logout, name='logout'),
     path('admin_login/', views.admin_login_view, name='admin_login'),  # Admin login URL
+    path('delete_image/<str:gallery_name>/<str:image_name>/', views.delete_image, name='delete_image'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -5,165 +5,164 @@
 {% block title %}All Applications - Admin Dashboard{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/admin_dashboard.css' %}">
-    <style>
-        /* Mica-inspired Styling */
-        .table-container {
-            background-color: rgba(255, 255, 255, 0.1); /* Glass-like background */
-            backdrop-filter: blur(10px); /* Blur effect */
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin_dashboard.css' %}">
+<style>
+    .table-container {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
 
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            color: #fff; /* White text for better contrast */
-        }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #333;
+        font-weight: 500;
+        background-color: white;
+    }
 
-        .table th, .table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider */
-        }
+    .table th, .table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
 
-        .table th {
-            background-color: rgba(0, 0, 0, 0.1); /* Slightly darker header */
-        }
+    .table th {
+        background-color: #eaeaea;
+    }
 
-        .table tbody tr:hover {
-            background-color: rgba(0, 0, 0, 0.2); /* Hover effect */
-        }
+    .table tbody tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
 
-        .application-status {
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+    .table tbody tr:nth-child(even) {
+        background-color: #ffffff;
+    }
 
-        .application-status.pending {
-            background-color: rgba(255, 204, 0, 0.8); /* Yellow */
-            color: #333;
-        }
+    .application-status {
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: inline-block;
+    }
 
-        .application-status.accepted {
-            background-color: rgba(0, 204, 102, 0.8); /* Green */
-            color: #fff;
-        }
+    .application-status.pending {
+        background-color: #ffeb99;
+        color: #333;
+    }
 
-        .application-status.rejected {
-            background-color: rgba(255, 51, 51, 0.8); /* Red */
-            color: #fff;
-        }
+    .application-status.accepted {
+        background-color: #79d29d;
+        color: #fff;
+    }
 
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
+    .application-status.rejected {
+        background-color: #e57373;
+        color: #fff;
+    }
 
-        .btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            color: #fff;
-            transition: background-color 0.3s ease;
-        }
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+    }
 
-        .btn-success {
-            background-color: #28a745;
-        }
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
 
-        .btn-danger {
-            background-color: #dc3545;
-        }
+    .btn-success {
+        background-color: #28a745;
+    }
 
-        .btn-primary {
-            background-color: #007bff;
-        }
+    .btn-danger {
+        background-color: #dc3545;
+    }
 
-        .btn-success:hover {
-            background-color: #218838;
-        }
+    .btn-primary {
+        background-color: #007bff;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        display: inline-block;
+    }
 
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
+    .btn-success:hover {
+        background-color: #218838;
+    }
 
-        .btn-primary:hover {
-            background-color: #0069d9;
-        }
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
 
-        /* Mica-style Edit Button */
-        .btn-mica {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px); /* Slightly less blur than the table */
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none; /* Remove underline from links */
-            transition: background-color 0.3s ease;
-            display: inline-block; /* Makes it behave like a button in the flex container */
-        }
-
-        .btn-mica:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-    </style>
+    .btn-primary:hover {
+        background-color: #0069d9;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-    <div class="admin-dashboard-content">
-        <h1>All Applications</h1>
-        <p>Review and manage online applications submitted by prospective students.</p>
+<div class="admin-dashboard-content">
+    <h1>All Applications</h1>
+    <p>Review and manage online applications submitted by prospective students.</p>
 
-        <div class="table-container">
-            {% if applications %}
-                <table class="table">
-                    <thead>
+    <div class="table-container">
+        {% if applications %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Application Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Application Date</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <td>{{ application.name }}</td>
+                            <td>{{ application.email }}</td>
+                            <td>{{ application.application_date }}</td>
+                            <td>
+                                <span class="application-status {{ application.status }}">
+                                    {% if application.status == 'accepted' %}
+                                        ✅
+                                    {% elif application.status == 'rejected' %}
+                                        ❌
+                                    {% else %}
+                                        ⏳
+                                    {% endif %}
+                                    {{ application.get_status_display }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <form method="post" action="{% url 'accept_application' application.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success ripple">Accept</button>
+                                    </form>
+                                    <form method="post" action="{% url 'reject_application' application.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger ripple">Reject</button>
+                                    </form>
+                                    <a href="{% url 'edit_application' application.id %}" class="btn-primary">Edit Details</a>
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for application in applications %}
-                            <tr>
-                                <td>{{ application.name }}</td>
-                                <td>{{ application.email }}</td>
-                                <td>{{ application.application_date }}</td>
-                                <td>
-                                    <span class="application-status {{ application.status }}">
-                                        {{ application.get_status_display }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <form method="post" action="{% url 'accept_application' application.id %}">
-                                            {% csrf_token %}
-                                            <button type="submit" class="btn btn-success ripple">Accept</button>
-                                        </form>
-                                        <form method="post" action="{% url 'reject_application' application.id %}">
-                                            {% csrf_token %}
-                                            <button type="submit" class="btn btn-danger ripple">Reject</button>
-                                        </form>
-                                        <!-- Mica-style Edit Button -->
-                                        <a href="{% url 'edit_application' application.id %}" class="btn-primary">Edit Details</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <p>No online applications found.</p>
-            {% endif %}
-        </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No online applications found.</p>
+        {% endif %}
     </div>
+</div>
 {% endblock %}

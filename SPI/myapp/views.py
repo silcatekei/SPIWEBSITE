@@ -324,6 +324,37 @@ def upload_image(request):
 
     return render(request, 'upload_image.html', {'galleries': galleries})
 
+# Delete Image Functionality
+@login_required(login_url='/admin/login/')
+@user_passes_test(is_admin, login_url='/admin/login/', redirect_field_name=None)
+def delete_image(request, gallery_name, image_name):
+    gallery_path = os.path.join(settings.BASE_DIR, 'myapp', 'static', 'images', 'galleries', gallery_name)
+    image_path = os.path.join(gallery_path, image_name)
+
+    # Check if the image exists and delete it
+    if os.path.exists(image_path):
+        os.remove(image_path)
+        messages.success(request, f"Image '{image_name}' deleted successfully.")
+    else:
+        messages.error(request, f"Image '{image_name}' does not exist.")
+
+    return redirect('gallery', gallery_name=gallery_name)
+
+
+# Delete Gallery Functionality
+@login_required(login_url='/admin/login/')
+@user_passes_test(is_admin, login_url='/admin/login/', redirect_field_name=None)
+def delete_gallery(request, gallery_name):
+    gallery_path = os.path.join(settings.BASE_DIR, 'myapp', 'static', 'images', 'galleries', gallery_name)
+
+    # Check if the gallery exists and if it is empty
+    if os.path.exists(gallery_path) and not os.listdir(gallery_path):
+        os.rmdir(gallery_path)  # Remove the gallery folder
+        messages.success(request, f"Gallery '{gallery_name}' deleted successfully.")
+    else:
+        messages.error(request, f"Gallery '{gallery_name}' is not empty or does not exist.")
+
+    return redirect('gallery')
 
 @login_required
 @user_passes_test(is_admin)

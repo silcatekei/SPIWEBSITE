@@ -29,3 +29,10 @@
 .quick-links a:hover {
     background-color: #ddd;
 }
+.main-content {
+    flex: 1; /* take up the rest of the space beside the sidebar */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* align content to the top */
+}
