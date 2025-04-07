@@ -8,10 +8,37 @@ from django.contrib import messages
 from django.core.files.storage import default_storage, FileSystemStorage
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
-from .models import Application, ContactMessage
-from .forms import ApplicationForm, ContactForm
+from .models import Application, ContactMessage, TeacherProfile, Grade
+from .forms import ApplicationForm, ContactForm, SubjectForm, ClassForm, AssignClassTeacherForm, AssignClassStudentForm
 from django.utils import timezone
 from django.utils.crypto import get_random_string
+from django.contrib.auth.models import User
+
+
+def teacher_profile(request):
+    if not request.user.is_authenticated or not request.user.is_staff:
+        return redirect('login')  # Or redirect to some other page if not authenticated
+    
+    # Fetch the teacher profile associated with the logged-in user
+    teacher_profile = TeacherProfile.objects.get(user=request.user)
+
+    return render(request, 'myapp/teacher_profile.html', {'teacher_profile': teacher_profile})
+
+def update_teacher_profile(request):
+    if not request.user.is_authenticated or not request.user.is_staff:
+        return redirect('login')  # Or redirect to some other page if not authenticated
+    
+    # Fetch the teacher profile associated with the logged-in user
+    teacher_profile = TeacherProfile.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        teacher_profile.first_name = request.POST.get('first_name')
+        teacher_profile.middle_name = request.POST.get('middle_name')
+        teacher_profile.address = request.POST.get('address')
+        teacher_profile.save()
+        return redirect('teacher_profile')  # Redirect to the teacher profile page after saving changes
+
+    return redirect('teacher_profile')  # You can redirect or render a confirmation page if needed
 
 
 
@@ -202,9 +229,31 @@ def login_view(request):
     return render(request, 'login.html', {'form': form}) # Updated path
 
 @login_required(login_url='/login/')
+def teacher_dashboard(request):
+    if not request.user.is_authenticated:
+        return redirect('login')  # Ensure this redirects only if not logged in
+    if not request.user.is_staff:
+        return redirect('student_dashboard')  # Or a proper redirect if not a teacher
+    return render(request, 'myapp/teacher_dashboard.html')
+
+@login_required(login_url='/login/')
 def student_dashboard(request):
-    context = {'user': request.user}
-    return render(request, 'student_dashboard.html', context)
+    if not request.user.is_authenticated:
+        return redirect('login')
+    if request.user.is_staff:
+        return redirect('teacher_dashboard')  # Ensure this is working correctly
+    return render(request, 'student_dashboard.html')
+
+@login_required(login_url='/login/')
+def teacher_profile(request):
+    # Make sure the user is logged in and has a teacher profile
+    if not request.user.is_authenticated or not request.user.is_staff:
+        return redirect('login')  # Or redirect to some other page if not authenticated
+    
+    # Fetch the teacher profile associated with the logged-in user
+    teacher_profile = TeacherProfile.objects.get(user=request.user)
+    
+    return render(request, 'myapp/teacher_profile.html', {'teacher_profile': teacher_profile})
 
 
 def custom_logout_view(request):
@@ -260,6 +309,45 @@ def admin_login_view(request):
         form = AuthenticationForm() # if there is no data
 
     return render(request, 'admin_login.html', {'form': form}) # renders the form
+
+
+def update_teacher_profile(request):
+    user = request.user
+
+    # Check if the profile exists, if not create a new one
+    profile, created = TeacherProfile.objects.get_or_create(user=user)
+
+    if request.method == 'POST':
+        user.first_name = request.POST.get('first_name')
+        user.middle_name = request.POST.get('middle_name', '')
+        user.address = request.POST.get('address', '')
+        user.save()
+        
+        # Update teacher profile
+        profile.middle_name = request.POST.get('middle_name', '')
+        profile.address = request.POST.get('address', '')
+        profile.save()
+        
+        return redirect('teacher_dashboard')  # Redirect to teacher dashboard after update
+
+    # Pass the profile data to the template to pre-fill form fields
+    context = {
+        'profile': profile
+    }
+    
+    return render(request, 'teacher_dashboard.html', context)
+
+def add_grade(request):
+    if request.method == 'POST':
+        student_id = request.POST.get('student')
+        subject_id = request.POST.get('subject')
+        grade_value = request.POST.get('grade')
+
+        grade = Grade(student_id=student_id, subject_id=subject_id, grade_value=grade_value)
+        grade.save()
+        return redirect('teacher_dashboard')
+
+    return render(request, 'teacher_dashboard.html')
 
 @login_required(login_url='/admin/login/')  # Redirects logged-out users to login
 @user_passes_test(is_admin, login_url='/admin/login/', redirect_field_name=None)
@@ -470,3 +558,99 @@ def delete_message(request, message_id):
     message = get_object_or_404(ContactMessage, pk=message_id)
     message.delete()
     return redirect('contact_messages')  # Redirect back to the messages list
+
+
+# admin class management
+
+def manage_classes(request):
+    subject_form = SubjectForm()
+    class_form = ClassForm()
+    assign_teacher_form = AssignClassTeacherForm()
+    assign_student_form = AssignClassStudentForm()
+
+    if request.method == 'POST':
+        if 'add_subject' in request.POST:
+            subject_form = SubjectForm(request.POST)
+            if subject_form.is_valid():
+                subject_form.save()
+        elif 'add_class' in request.POST:
+            class_form = ClassForm(request.POST)
+            if class_form.is_valid():
+                class_form.save()
+        elif 'assign_teacher' in request.POST:
+            assign_teacher_form = AssignClassTeacherForm(request.POST)
+            if assign_teacher_form.is_valid():
+                assign_teacher_form.save()
+        elif 'assign_student' in request.POST:
+            assign_student_form = AssignClassStudentForm(request.POST)
+            if assign_student_form.is_valid():
+                assign_student_form.save()
+
+    context = {
+        'subject_form': subject_form,
+        'class_form': class_form,
+        'assign_teacher_form': assign_teacher_form,
+        'assign_student_form': assign_student_form
+    }
+    return render(request, 'myapp/manage_classes.html', context)
+
+def add_class(request):
+    if request.method == 'POST':
+        # Handle form submission here
+        pass
+    return render(request, 'add_class.html')  # Placeholder template
+
+def assign_class_teacher(request):
+    if request.method == 'POST':
+        # Logic for assigning a teacher to a class
+        pass
+    return render(request, 'assign_class_teacher.html')  # Placeholder template
+
+def assign_class_student(request):
+    if request.method == 'POST':
+        # Logic for assigning a student to a class
+        pass
+    return render(request, 'assign_class_student.html')  # Placeholder template
+
+
+
+
+def add_delete_admin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        admin_type = request.POST.get('admin_type')
+
+        if username and password and admin_type:
+            if User.objects.filter(username=username).exists():
+                messages.error(request, f'Username "{username}" already exists. Please choose a different one.')
+            else:
+                try:
+                    user = User.objects.create_user(username=username, password=password)
+                    # Assigning roles
+                    if admin_type == 'teacher':
+                        user.is_staff = True  # Only teachers should be 'staff'
+                        user.save()
+                        messages.success(request, f'{username} has been added as a teacher.')
+                    else:
+                        # Handle other types (e.g., students), no 'is_staff' for students
+                        user.save()
+                        messages.success(request, f'{username} has been added as a student.')
+                except Exception as e:
+                    messages.error(request, f'Error creating admin: {e}')
+        else:
+            messages.error(request, 'Please fill in all fields.')
+
+    elif request.method == 'GET' and 'delete' in request.GET:
+        user_id = request.GET['delete']
+        try:
+            user = User.objects.get(id=user_id)
+            user.delete()
+            messages.success(request, f'{user.username} has been deleted.')
+        except User.DoesNotExist:
+            messages.error(request, 'User not found.')
+
+    # Fetch only staff (teachers)
+    users = User.objects.filter(is_staff=True)
+
+    return render(request, 'add_delete_admin.html', {'users': users})

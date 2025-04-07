@@ -1,5 +1,5 @@
 from django import forms
-from .models import Application
+from .models import Application, Subject, Class, TeacherProfile, ClassAssignment
 
 class ApplicationForm(forms.ModelForm):
     class Meta:
@@ -62,3 +62,26 @@ class ContactForm(forms.Form):
         if not value or not value.strip():
             raise forms.ValidationError(f"{field_name} cannot be empty or contain only spaces.")
         return value.strip()
+
+class SubjectForm(forms.ModelForm):
+    class Meta:
+        model = Subject
+        fields = '__all__'
+
+class ClassForm(forms.ModelForm):
+    class Meta:
+        model = Class
+        fields = '__all__'
+
+class AssignClassTeacherForm(forms.ModelForm):
+    class Meta:
+        model = ClassAssignment
+        fields = ['assigned_class', 'teacher']
+
+class AssignClassStudentForm(forms.ModelForm):
+    class Meta:
+        model = ClassAssignment
+        fields = ['assigned_class', 'students']
+        widgets = {
+            'students': forms.CheckboxSelectMultiple
+        }

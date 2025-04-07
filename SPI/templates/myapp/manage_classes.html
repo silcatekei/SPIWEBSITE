@@ -1,0 +1,102 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block title %}Manage Classes{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Manage Classes & Subjects</h2>
+
+<!-- Tabs -->
+<ul class="nav nav-tabs" id="classTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="add-class-tab" data-bs-toggle="tab" data-bs-target="#add-class" type="button" role="tab">Add Subject/Class</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="assign-teacher-tab" data-bs-toggle="tab" data-bs-target="#assign-teacher" type="button" role="tab">Assign Class to Teacher</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="assign-student-tab" data-bs-toggle="tab" data-bs-target="#assign-student" type="button" role="tab">Assign Class to Student</button>
+  </li>
+</ul>
+
+<!-- Tab Content -->
+<div class="tab-content p-3 border border-top-0 bg-white rounded-bottom" id="classTabContent">
+
+  <!-- Add Subject/Class -->
+  <div class="tab-pane fade show active" id="add-class" role="tabpanel">
+    <form method="POST" action="{% url 'add_class' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="subject_code" class="form-label">Subject Code</label>
+        <input type="text" class="form-control" name="subject_code" required>
+      </div>
+      <div class="mb-3">
+        <label for="subject_name" class="form-label">Subject Description</label>
+        <input type="text" class="form-control" name="subject_name" required>
+      </div>
+      <div class="mb-3">
+        <label for="schedule" class="form-label">Schedule</label>
+        <input type="text" class="form-control" name="schedule" placeholder="e.g. MWF 10:00-11:00" required>
+      </div>
+      <div class="mb-3">
+        <label for="duration" class="form-label">Duration (in weeks)</label>
+        <input type="number" class="form-control" name="duration" required>
+      </div>
+      <div class="mb-3">
+        <label for="room" class="form-label">Room</label>
+        <input type="text" class="form-control" name="room" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Subject/Class</button>
+    </form>
+  </div>
+
+  <!-- Assign Class to Teacher -->
+  <div class="tab-pane fade" id="assign-teacher" role="tabpanel">
+    <form method="POST" action="{% url 'assign_class_teacher' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="class_id" class="form-label">Select Class</label>
+        <select name="class_id" class="form-select" required>
+          {% for class in classes %}
+          <option value="{{ class.id }}">{{ class.subject_name }} ({{ class.subject_code }})</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="teacher_id" class="form-label">Select Teacher</label>
+        <select name="teacher_id" class="form-select" required>
+          {% for teacher in teachers %}
+          <option value="{{ teacher.id }}">{{ teacher.username }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success">Assign to Teacher</button>
+    </form>
+  </div>
+
+  <!-- Assign Class to Student -->
+  <div class="tab-pane fade" id="assign-student" role="tabpanel">
+    <form method="POST" action="{% url 'assign_class_student' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="class_id" class="form-label">Select Class</label>
+        <select name="class_id" class="form-select" required>
+          {% for class in classes %}
+          <option value="{{ class.id }}">{{ class.subject_name }} ({{ class.subject_code }})</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="student_id" class="form-label">Select Student</label>
+        <select name="student_id" class="form-select" required>
+          {% for student in students %}
+          <option value="{{ student.id }}">{{ student.username }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-info">Assign to Student</button>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

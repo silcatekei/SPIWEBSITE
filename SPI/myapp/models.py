@@ -49,3 +49,49 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"Message from {self.name} ({self.email})"
+    
+
+class Subject(models.Model):
+    code = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.code} - {self.name}"
+
+class Class(models.Model):
+    class_id = models.CharField(max_length=20, unique=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    schedule = models.CharField(max_length=100)
+    class_time = models.TimeField()
+    duration = models.DurationField()
+    room = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.class_id} - {self.subject.name}"
+
+
+class TeacherProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100)
+    middle_name = models.CharField(max_length=100, blank=True)
+    address = models.TextField(default="Not Provided")  # Default value for the new field
+
+    def __str__(self):
+        return self.user.username
+
+class ClassAssignment(models.Model):
+    assigned_class = models.ForeignKey(Class, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(TeacherProfile, on_delete=models.CASCADE)
+    students = models.ManyToManyField(User, related_name='student_classes')
+
+    def __str__(self):
+        return f"{self.assigned_class} - {self.teacher}"
+    
+class Grade(models.Model):
+    student = models.ForeignKey('auth.User', on_delete=models.CASCADE)  # Assuming User is the student
+    course_name = models.CharField(max_length=255)
+    grade = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f"{self.student.username} - {self.course_name}: {self.grade}"

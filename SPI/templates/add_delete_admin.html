@@ -1,0 +1,80 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<h3>Add or Delete Admin (Teacher)</h3>
+
+<!-- Display Messages -->
+{% if messages %}
+    <div class="alert alert-info">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!-- Add Admin Form -->
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="admin_type">Admin Type:</label>
+        <select name="admin_type" id="admin_type" class="form-control">
+            <option value="teacher">Teacher</option>
+            <!-- Add more admin types as needed -->
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Admin</button>
+</form>
+
+<hr>
+
+<!-- List Admins with Delete Option -->
+<h4>Existing Admins (Teachers)</h4>
+<ul class="list-group">
+    {% for user in users %}
+        {% if user.is_staff %}  <!-- Only show admins with is_staff=True -->
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="#" data-toggle="modal" data-target="#userDetailsModal{{ user.id }}">{{ user.username }}</a> <!-- Make username clickable -->
+                
+                <div class="d-flex">
+                    <span class="badge badge-secondary mr-3">ID: {{ user.id }}</span>
+                    <span class="badge badge-secondary mr-3">Password: {{ user.password }}</span>
+                    <a href="?delete={{ user.id }}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </li>
+
+            <!-- Modal for showing user details -->
+            <div class="modal fade" id="userDetailsModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="userDetailsModalLabel{{ user.id }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="userDetailsModalLabel{{ user.id }}">User Details: {{ user.username }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>ID:</strong> {{ user.id }}</p>
+                            <p><strong>Password:</strong> {{ user.password }}</p>
+                            <!-- Add more user details here if needed -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% empty %}
+        <li class="list-group-item">No admins added yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

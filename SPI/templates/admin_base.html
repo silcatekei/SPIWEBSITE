@@ -130,20 +130,12 @@
             <a href="#">Accept Applications</a>
             <a href="#">Reject Applications</a>
             <a href="{% url 'contact_messages' %}">Messages</a>
+            <a href="{% url 'upload_image' %}">Upload Images</a>
+            <a href="{% url 'add_delete_admin' %}">Add/Delete Admin</a>
+            <a href="{% url 'manage_classes' %}">Manage Classes/Subjects</a>
         </div>
 
-        <div class="sidebar-section">
-            <h5>
-                <a class="d-block" data-bs-toggle="collapse" href="#galleryMenu" role="button" aria-expanded="false" aria-controls="galleryMenu">
-                    Manage Gallery <i class="fa fa-chevron-down"></i>
-                </a>
-            </h5>
-            <div class="collapse" id="galleryMenu">
-                <a href="{% url 'upload_image' %}"><i class="fa fa-upload"></i> Upload Image</a>
-                <a href="{% url 'upload_folder' %}"><i class="fa fa-folder"></i> Upload Folder</a>
-                <a href="{% url 'view_gallery' %}"><i class="fa fa-images"></i> View Gallery</a>
-            </div>
-        </div>
+
 
         <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
