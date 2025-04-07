@@ -59,16 +59,18 @@ class Subject(models.Model):
     def __str__(self):
         return f"{self.code} - {self.name}"
 
-class Class(models.Model):
-    class_id = models.CharField(max_length=20, unique=True)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    schedule = models.CharField(max_length=100)
-    class_time = models.TimeField()
-    duration = models.DurationField()
-    room = models.CharField(max_length=50)
+from django.db import models
+
+class Class(models.Model):  # or whatever your class model is named
+    subject_code = models.CharField(max_length=20)
+    subject_name = models.CharField(max_length=100)
+    schedule = models.CharField(max_length=50)
+    duration = models.PositiveIntegerField()
+    room = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"{self.class_id} - {self.subject.name}"
+        return f"{self.subject_name} ({self.subject_code})"
+
 
 
 class TeacherProfile(models.Model):

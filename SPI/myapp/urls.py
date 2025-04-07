@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from .views import upload_gallery_image, custom_logout
+from .views import add_class
 
 urlpatterns = [
     # Public Pages
@@ -50,7 +51,7 @@ urlpatterns = [
     path('home/', views.admin_home, name='admin_home'),
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('manage-classes/', views.manage_classes, name='manage_classes'),
-    path('add_class/', views.add_class, name='add_class'),
+    path('add-class/', add_class, name='add_class'),
     path('assign_class_teacher/', views.assign_class_teacher, name='assign_class_teacher'),
     path('assign_class_student/', views.assign_class_student, name='assign_class_student'),
     path('add_delete_admin/', views.add_delete_admin, name='add_delete_admin'),
@@ -58,7 +59,8 @@ urlpatterns = [
     path('student_dashboard/', views.student_dashboard, name='student_dashboard'),
     path('teacher/profile/', views.teacher_profile, name='teacher_profile'),
     path('teacher/profile/update/', views.update_teacher_profile, name='update_teacher_profile'),
-
+    path('delete-class/<int:class_id>/', views.delete_class, name='delete_class'),
+    
     # Applications
     path('confirmation/<int:application_id>/', views.application_confirmation, name='application_confirmation'),
     path('accept_application/<int:application_id>/', views.accept_application, name='accept_application'),

@@ -9,11 +9,47 @@ from django.core.files.storage import default_storage, FileSystemStorage
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from .models import Application, ContactMessage, TeacherProfile, Grade
-from .forms import ApplicationForm, ContactForm, SubjectForm, ClassForm, AssignClassTeacherForm, AssignClassStudentForm
+from .forms import ApplicationForm, ContactForm, SubjectForm, ClassForm, AssignClassTeacherForm, AssignClassStudentForm, AddClassForm
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from .models import Class  # Assuming you have a Class model
 
+def delete_class(request, class_id):
+    if request.method == 'POST':
+        class_instance = get_object_or_404(Class, id=class_id)
+        class_instance.delete()
+    return redirect('add_class')  # Redirect back to the manage page
+
+def add_class(request):
+    if request.method == 'POST':
+        form = AddClassForm(request.POST)
+        if form.is_valid():
+            # Create a new Class instance and save it to the database
+            Class.objects.create(
+                subject_code=form.cleaned_data['subject_code'],
+                subject_name=form.cleaned_data['subject_name'],
+                schedule=form.cleaned_data['schedule'],
+                duration=form.cleaned_data['duration'],
+                room=form.cleaned_data['room']
+            )
+            form = AddClassForm()  # Reset the form after successful submission
+            success_message = "Class added successfully!"  # Success message
+        else:
+            success_message = None  # No success message if form is invalid
+    else:
+        form = AddClassForm()
+        success_message = None
+
+    # Fetch all classes to display
+    classes = Class.objects.all()
+
+    return render(request, 'myapp/manage_classes.html', {
+        'form': form,
+        'success_message': success_message,
+        'classes': classes  # Pass the list of classes to the template
+    })
 
 def teacher_profile(request):
     if not request.user.is_authenticated or not request.user.is_staff:
@@ -593,12 +629,6 @@ def manage_classes(request):
         'assign_student_form': assign_student_form
     }
     return render(request, 'myapp/manage_classes.html', context)
-
-def add_class(request):
-    if request.method == 'POST':
-        # Handle form submission here
-        pass
-    return render(request, 'add_class.html')  # Placeholder template
 
 def assign_class_teacher(request):
     if request.method == 'POST':

@@ -17,6 +17,9 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="assign-student-tab" data-bs-toggle="tab" data-bs-target="#assign-student" type="button" role="tab">Assign Class to Student</button>
   </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="existing-classes-tab" data-bs-toggle="tab" data-bs-target="#existing-classes" type="button" role="tab">Existing Classes</button>
+  </li>
 </ul>
 
 <!-- Tab Content -->
@@ -26,6 +29,11 @@
   <div class="tab-pane fade show active" id="add-class" role="tabpanel">
     <form method="POST" action="{% url 'add_class' %}">
       {% csrf_token %}
+      {% if success_message %}
+        <div class="alert alert-success" role="alert">
+          {{ success_message }}
+        </div>
+      {% endif %}
       <div class="mb-3">
         <label for="subject_code" class="form-label">Subject Code</label>
         <input type="text" class="form-control" name="subject_code" required>
@@ -39,7 +47,7 @@
         <input type="text" class="form-control" name="schedule" placeholder="e.g. MWF 10:00-11:00" required>
       </div>
       <div class="mb-3">
-        <label for="duration" class="form-label">Duration (in weeks)</label>
+        <label for="duration" class="form-label">Duration (in hrs)</label>
         <input type="number" class="form-control" name="duration" required>
       </div>
       <div class="mb-3">
@@ -48,6 +56,44 @@
       </div>
       <button type="submit" class="btn btn-primary">Add Subject/Class</button>
     </form>
+  </div>
+
+  <!-- Existing Classes Table (New Tab) -->
+  <div class="tab-pane fade" id="existing-classes" role="tabpanel">
+    <h4 class="mt-5">Existing Classes</h4>
+    <table class="table table-bordered mt-3">
+      <thead class="table-light">
+        <tr>
+          <th>Subject Code</th>
+          <th>Subject Name</th>
+          <th>Schedule</th>
+          <th>Duration</th>
+          <th>Room</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for class in classes %}
+        <tr>
+          <td>{{ class.subject_code }}</td>
+          <td>{{ class.subject_name }}</td>
+          <td>{{ class.schedule }}</td>
+          <td>{{ class.duration }} hrs</td>
+          <td>{{ class.room }}</td>
+          <td>
+            <form method="POST" action="{% url 'delete_class' class.id %}" onsubmit="return confirm('Are you sure you want to delete this class?');">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" class="text-center">No classes added yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 
   <!-- Assign Class to Teacher -->
