@@ -3,38 +3,53 @@
 
 <!-- Footer -->
 <footer>
-    <!-- Left Section: Contact Details -->
-    <div class="footer-section footer-left">
-        <p><strong>Address:</strong> 
+    <!-- Left Section: Contact Info -->
+    <div class="footer-section left-section">
+        <p><strong>Contact Information</strong></p>
+        <p><strong>Address:</strong>
             <a href="https://maps.app.goo.gl/EGto9joK7MjxtGve9" target="_blank">
                 47 Manuel L. Quezon Ext, Dalig, Antipolo, 1870 Rizal
             </a>
         </p>
         <p><strong>Contact:</strong> Mobile - 0905 317 2869 | Tel - (02) 8570-2298</p>
-        <p><strong>Email:</strong> 
+        <p><strong>Email:</strong>
             <a href="mailto:mktg.skillpowerinstitute@gmail.com">
                 mktg.skillpowerinstitute@gmail.com
             </a>
         </p>
-        <p><strong>Facebook:</strong> 
+        <p><strong>Facebook:</strong>
             <a href="https://www.facebook.com/SPIAntipoloCity/" target="_blank">
                 SPI Antipolo City
             </a>
         </p>
     </div>
 
-    <!-- Middle Section: Navigation Links -->
-    <div class="footer-section footer-center">
-        <p><a href="{% url 'about' %}">About Us</a></p>
-        <p><a href="{% url 'programs' %}">Programs</a></p>
-        <p><a href="{% url 'application_process' %}">Admission</a></p>
+    <!-- Right Section: Map -->
+    <div class="footer-section right-section">
+        <p><strong>Location</strong></p>
+        <!-- Embedded Map -->
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!4v1743056203604!6m8!1m7!1sNt_uevF8tdv0IErJ6xaO6w!2m2!1d14.57525655011916!2d121.1767021572761!3f245.58475368945489!4f-2.8032465410687593!5f0.7820865974627469"
+            class="map-frame"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
     </div>
 
-    <!-- Right Section: Programs -->
-    <div class="footer-section footer-right">
+    <!-- Middle Section: Navigation -->
+    <div class="footer-section middle-section">
+        <p><strong>Navigation</strong></p>
+        <a href="{% url 'about' %}">About Us</a>
+        <a href="{% url 'programs' %}">Programs</a>
+        <a href="{% url 'application_process' %}">Admission</a>
+    </div>
+
+    <!-- Bottom Section: Programs -->
+    <div class="footer-section bottom-section">
         <p><strong>Programs</strong></p>
-        <p><a href="{% url 'history' %}">History</a></p>
-        <p><a href="{% url 'mission' %}">Mission</a></p>
-        <p><a href="{% url 'contact' %}">Contact</a></p>
+        <a href="{% url 'history' %}">History</a>
+        <a href="{% url 'mission' %}">Mission</a>
+        <a href="{% url 'contact' %}">Contact</a>
     </div>
 </footer>

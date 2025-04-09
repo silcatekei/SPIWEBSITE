@@ -7,7 +7,16 @@
 
 <main class="contact-page">
     <h1>Contact Us</h1>
-
+        <!-- Contact Form -->
+        <section class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form action="{% url 'contact' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    <h2>You can also contact our other branches</h2>
     <!-- Branch Information -->
     <section class="branch">
         <h2>📍 Angeles Branch</h2>
@@ -41,15 +50,7 @@
         <p>🔗 <a href="https://www.facebook.com/SPIQuezonCity" target="_blank">Visit our Facebook Page</a></p>
     </section>
 
-    <!-- Contact Form -->
-    <section class="contact-form">
-        <h2>Send Us a Message</h2>
-        <form action="{% url 'contact' %}" method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+
 
     <!-- Google Map (Quezon City Branch Example) -->
     <section class="map-container">

@@ -1,60 +1,75 @@
-/* Footer Styles - Mica Inspired */
+/* Compact Footer Styles */
 footer {
-    background: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
-    color: white;
-    padding: 20px;
+    color: #ffffff;
+    padding: 5px 10px;
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start;  /* Align items to the top */
-    flex-wrap: wrap;
-    backdrop-filter: blur(10px); /* Apply blur */
-    -webkit-backdrop-filter: blur(10px); /* For Safari */
-    border-radius: 10px;
-    margin-top: 20px; /* Add some space above the footer */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 16px; /* Increased font size */
-    line-height: 1.6; /* Improved line height for readability */
+    flex-wrap: wrap; /* Allows wrapping of footer sections */
+    justify-content: space-between;
+    align-items: flex-start;
+    backdrop-filter: blur(3px); /* Adjusted blur effect */
+    -webkit-backdrop-filter: blur(3px); /* Adjusted blur effect */
+    border-radius: 1px;
+    margin-top: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+    font-size: 12px; /* Smaller font size */
+    line-height: 1.4;
 }
 
-/* Footer Section Styling */
-.footer-section {
-    width: 30%;
-    text-align: left;
-    margin-bottom: 20px;  /* Add spacing between sections on smaller screens */
+/* Footer Sections */
+footer .footer-section {
+    flex: 1 1 180px; /* Allows the sections to adjust based on content */
+    margin: 5px;
+    padding: 8px; /* Ensures padding inside sections */
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    footer {
-        flex-direction: column; /* Stack sections vertically */
-        align-items: center; /* Center the sections */
-        text-align: center;
-    }
-
-    .footer-section {
-        width: 80%; /* Make sections wider on smaller screens */
-    }
+/* Map iframe */
+.map-frame {
+    width: 100%;
+    height: 160px; /* Adjusted map height */
+    border: 0;
+    border-radius: 8px;
+    margin-top: 5px;
 }
 
-/* Styling for individual links */
+/* Links */
 footer a {
-    color: #FFD700; /* Golden yellow color */
+    color: #eafb89df;
     text-decoration: none;
-    transition: color 0.3s ease;
-    display: block; /* Makes the whole line clickable */
-    margin-bottom: 5px; /* Spacing between links */
-    font-size: 20px; /* Ensure links also have the larger font size */
+    transition: color 0.2s ease;
+    display: block;
+    margin-bottom: 3px;
 }
 
 footer a:hover {
-    color: #FFECB3; /* Lighter golden yellow on hover */
+    color: #FFECB3;
 }
 
-/* Styling for strong tags (e.g., "Address:", "Contact:") */
+/* Labels */
 footer strong {
-    color: #FFFFFF; /* White color for strong text */
-    font-weight: bold;
     display: block;
-    margin-bottom: 5px;
-    font-size: 20px; /* Ensure strong text has the larger font size */
+    margin-bottom: 3px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .footer-section {
+        width: 100%;
+        margin: 8px 0;
+        padding: 8px;
+    }
+
+    .map-frame {
+        height: 150px;
+    }
 }

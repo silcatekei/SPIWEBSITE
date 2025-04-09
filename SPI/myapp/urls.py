@@ -5,6 +5,8 @@ from django.conf.urls.static import static
 from . import views
 from .views import upload_gallery_image, custom_logout
 from .views import add_class
+from django.views.generic import RedirectView
+from django.urls import re_path
 
 urlpatterns = [
     # Public Pages
@@ -69,4 +71,6 @@ urlpatterns = [
 
     # Quick Links
     path('quick-links/', views.quick_links, name='quick_links'),
+
+    re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
