@@ -1,0 +1,85 @@
+<!-- myapp/templates/myapp/edit_application.html -->
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block title %}Edit Application{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin_dashboard.css' %}">
+    <style>
+        /* Mica-style form */
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: #fff; /* Keep text white */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #257947; /* Ensure label is white */
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);  /* Slightly increase alpha for input background */
+            color: #000; /* Set input text to black */
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);  /* Optional glow effect */
+        }
+
+        .btn-save {
+            background-color: rgba(0, 123, 255, 0.8);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-save:hover {
+            background-color: rgba(0, 123, 255, 1);
+        }
+
+        .text-danger {
+            color: #ffcdd2; /* Lighter red for errors */
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="admin-dashboard-content">
+        <h1>Edit Application</h1>
+
+        <div class="form-container">
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn-save">Save Changes</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
