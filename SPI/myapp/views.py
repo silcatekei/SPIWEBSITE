@@ -9,12 +9,50 @@ from django.core.files.storage import default_storage, FileSystemStorage
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from .models import Application, ContactMessage, TeacherProfile, Grade
-from .forms import ApplicationForm, ContactForm, SubjectForm, ClassForm, AssignClassTeacherForm, AssignClassStudentForm, AddClassForm
+from .forms import ApplicationForm, ContactForm, SubjectForm, ClassForm, AssignClassTeacherForm, AssignClassStudentForm, AddClassForm, AnnouncementForm
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from .models import Class  # Assuming you have a Class model
+from .models import Class, Announcement  # Assuming you have a Class model
+from django.http import HttpResponseForbidden
+
+def manage_announcements(request):
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_announcements')
+    else:
+        form = AnnouncementForm()
+
+    announcements = Announcement.objects.all().order_by('-created_at')
+    return render(request, 'manage_announcements.html', {
+        'form': form,
+        'announcements': announcements
+    })
+
+def announcement_detail(request, id):
+    announcement = get_object_or_404(Announcement, id=id)
+    return render(request, 'announcement_page.html', {'announcement': announcement})
+
+def public_announcement_detail(request, id):
+    announcement = get_object_or_404(Announcement, id=id)
+    return render(request, 'announcement_page.html', {'announcement': announcement})
+
+def delete_announcement(request, pk):
+    # Ensure the user has the proper permissions (e.g., admin or staff).
+    if not request.user.is_staff:
+        return HttpResponseForbidden("You do not have permission to delete this announcement.")
+    
+    announcement = get_object_or_404(Announcement, pk=pk)
+    
+    # Delete the announcement
+    announcement.delete()
+    
+    # Redirect back to the manage announcements page
+    return redirect('manage_announcements')
+
 
 def delete_class(request, class_id):
     if request.method == 'POST':
@@ -79,8 +117,12 @@ def update_teacher_profile(request):
 
 
 # --- Basic Page Views ---
+
 def home(request):
-    return render(request, 'myapp/home.html')
+    # Get the latest 10 announcements
+    announcements = Announcement.objects.all().order_by('-created_at')[:10]
+    
+    return render(request, 'home.html', {'announcements': announcements})
 
 def about(request):
     return render(request, 'myapp/about.html')

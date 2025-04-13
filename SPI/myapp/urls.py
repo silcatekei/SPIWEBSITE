@@ -1,12 +1,11 @@
-from django.urls import path
+from django.urls import path, re_path
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views
-from .views import upload_gallery_image, custom_logout
-from .views import add_class
 from django.views.generic import RedirectView
-from django.urls import re_path
+
+from . import views
+from .views import upload_gallery_image, custom_logout, add_class
 
 urlpatterns = [
     # Public Pages
@@ -45,12 +44,11 @@ urlpatterns = [
     path('upload-folder/', views.upload_folder, name='upload_folder'),
     path('delete_image/<str:gallery_name>/<str:image_name>/', views.delete_image, name='delete_image'),
 
-
     # User Auth & Dashboard
     path('login/', views.login_view, name='login'),
     path('logout/', custom_logout, name='logout'),
     path('admin_login/', views.admin_login_view, name='admin_login'),
-    path('home/', views.admin_home, name='admin_home'),
+    path('admin_home/', views.admin_home, name='admin_home'),
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('manage-classes/', views.manage_classes, name='manage_classes'),
     path('add-class/', add_class, name='add_class'),
@@ -62,15 +60,26 @@ urlpatterns = [
     path('teacher/profile/', views.teacher_profile, name='teacher_profile'),
     path('teacher/profile/update/', views.update_teacher_profile, name='update_teacher_profile'),
     path('delete-class/<int:class_id>/', views.delete_class, name='delete_class'),
-    
+    path('manage-announcements/', views.manage_announcements, name='manage_announcements'),
+    path('announcement/<int:id>/', views.announcement_detail, name='announcement_detail'),
+    path('announcements/<int:id>/', views.public_announcement_detail, name='public_announcement_detail'),
+    path('announcement/<int:id>/', views.announcement_detail, name='announcement_page'),
+    path('delete_announcement/<int:pk>/', views.delete_announcement, name='delete_announcement'),
+ 
+ 
+ 
     # Applications
     path('confirmation/<int:application_id>/', views.application_confirmation, name='application_confirmation'),
     path('accept_application/<int:application_id>/', views.accept_application, name='accept_application'),
     path('reject_application/<int:application_id>/', views.reject_application, name='reject_application'),
     path('application/edit/<int:application_id>/', views.edit_application, name='edit_application'),
 
-    # Quick Links
+    # Quick Links & Static Assets
     path('quick-links/', views.quick_links, name='quick_links'),
-
     re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+
+# Static and Media Files (only in DEBUG mode)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
